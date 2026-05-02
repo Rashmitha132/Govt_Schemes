@@ -1,5 +1,5 @@
 // File: src/pages/QuestionsPage.jsx
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const questionSets = {
   women: [
@@ -58,18 +58,18 @@ const categoryTitles = {
 };
 
 function isUserLoggedIn() {
-  if (localStorage.getItem("yojanMitraLoggedIn") === "true") {
+  const token = localStorage.getItem("yojanMitraAuthToken");
+  const user = localStorage.getItem("loggedInUser");
+  const isLoggedIn = localStorage.getItem("yojanMitraLoggedIn") === "true";
+
+  if (token && user && isLoggedIn) {
     return true;
   }
 
-  return ["loggedInUser", "currentUser", "user"].some((key) => {
-    try {
-      const value = localStorage.getItem(key);
-      return Boolean(value && JSON.parse(value));
-    } catch (error) {
-      return Boolean(localStorage.getItem(key));
-    }
-  });
+  localStorage.removeItem("yojanMitraLoggedIn");
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("yojanMitraUserId");
+  return false;
 }
 
 export default function QuestionsPage() {
@@ -85,8 +85,26 @@ export default function QuestionsPage() {
   const currentQuestion = questions[step];
   const isLastStep = step === questions.length - 1;
 
+  useEffect(() => {
+    if (!isUserLoggedIn()) {
+      localStorage.setItem("postLoginRedirect", `${window.location.pathname}${window.location.search}`);
+      window.location.href = "/kisaan-login.html";
+    }
+  }, []);
+
   const updateAnswer = (key, value) => {
     setAnswers((previous) => ({ ...previous, [key]: value }));
+  };
+
+  const logoutUser = () => {
+    localStorage.removeItem("yojanMitraAuthToken");
+    localStorage.removeItem("yojanMitraLoggedIn");
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("user");
+    localStorage.removeItem("yojanMitraUserId");
+    localStorage.removeItem("postLoginRedirect");
+    window.location.href = "/category.html";
   };
 
   const submitAnswers = async () => {
@@ -154,6 +172,12 @@ export default function QuestionsPage() {
       return;
     }
 
+    if (step === 0 && !isUserLoggedIn()) {
+      localStorage.setItem("postLoginRedirect", `${window.location.pathname}${window.location.search}`);
+      window.location.href = "/kisaan-login.html";
+      return;
+    }
+
     setError("");
     if (isLastStep) {
       submitAnswers();
@@ -196,9 +220,16 @@ export default function QuestionsPage() {
   return (
     <main className="questions-page">
       <section className="questions-shell">
-        <button className="back-button" type="button" onClick={() => window.history.back()}>
-          ← Back
-        </button>
+        <div className="page-actions">
+          <button className="back-button" type="button" onClick={() => window.history.back()}>
+            ← Back
+          </button>
+          {isUserLoggedIn() && (
+            <button className="logout-button" type="button" onClick={logoutUser}>
+              Logout
+            </button>
+          )}
+        </div>
 
         <div className="voice-banner">
           <span>🤖</span>

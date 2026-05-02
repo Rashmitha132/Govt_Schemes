@@ -2,6 +2,7 @@
 const categoriesGrid = document.getElementById("categoriesGrid");
 const nextButton = document.getElementById("nextButton");
 const backButton = document.getElementById("backButton");
+const logoutButton = document.getElementById("logoutButton");
 const voiceButton = document.getElementById("voiceButton");
 const toast = document.getElementById("toast");
 const headingNativeText = document.getElementById("headingNativeText");
@@ -275,6 +276,39 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
 }
 
+function isUserLoggedIn() {
+  const token = localStorage.getItem("yojanMitraAuthToken");
+  const user = localStorage.getItem("loggedInUser");
+  const isLoggedIn = localStorage.getItem("yojanMitraLoggedIn") === "true";
+
+  if (token && user && isLoggedIn) {
+    return true;
+  }
+
+  localStorage.removeItem("yojanMitraLoggedIn");
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("yojanMitraUserId");
+  return false;
+}
+
+function logoutUser() {
+  localStorage.removeItem("yojanMitraAuthToken");
+  localStorage.removeItem("yojanMitraLoggedIn");
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("user");
+  localStorage.removeItem("yojanMitraUserId");
+  localStorage.removeItem("postLoginRedirect");
+  showToast("Logged out");
+  setTimeout(() => {
+    window.location.href = "/category.html";
+  }, 500);
+}
+
+function renderAuthActions() {
+  logoutButton.hidden = !isUserLoggedIn();
+}
+
 function getLocalName(category) {
   const translatedName = categoryTranslations[category.id]?.[language];
   if (translatedName) {
@@ -353,6 +387,16 @@ async function goToQuestions(categoryId) {
   selectedCategory = categoryId;
   localStorage.setItem("selectedCategory", selectedCategory);
   renderCategories();
+  const questionsUrl = `/questions.html?category=${encodeURIComponent(selectedCategory)}`;
+
+  if (!isUserLoggedIn()) {
+    localStorage.setItem("postLoginRedirect", questionsUrl);
+    showToast("Please login to continue");
+    setTimeout(() => {
+      window.location.href = "/kisaan-login.html";
+    }, 600);
+    return;
+  }
 
   try {
     await postJson("/api/categories/select", {
@@ -362,7 +406,7 @@ async function goToQuestions(categoryId) {
   } catch (error) {
     showToast("Saved locally. Opening questions...");
   } finally {
-    window.location.href = `/questions.html?category=${encodeURIComponent(selectedCategory)}`;
+    window.location.href = questionsUrl;
   }
 }
 
@@ -397,7 +441,6 @@ categoriesGrid.addEventListener("click", (event) => {
   selectedCategory = card.dataset.categoryId;
   localStorage.setItem("selectedCategory", selectedCategory);
   renderCategories();
-  goToQuestions(selectedCategory);
 });
 
 nextButton.addEventListener("click", async () => {
@@ -414,6 +457,7 @@ backButton.addEventListener("click", () => {
   window.history.back();
 });
 
+logoutButton.addEventListener("click", logoutUser);
 voiceButton.addEventListener("click", speakPrompt);
 
 headingNativeText.textContent = activeCopy.heading;
@@ -425,4 +469,5 @@ featureExploreNative.textContent = activeCopy.featureExplore;
 featureMissedNative.textContent = activeCopy.featureMissed;
 
 loadCategories();
+renderAuthActions();
 setTimeout(speakPrompt, 500);

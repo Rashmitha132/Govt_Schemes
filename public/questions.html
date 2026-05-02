@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/questions.css?v=10">
-  <link rel="stylesheet" href="/css/futuristic.css?v=1">
+  <link rel="stylesheet" href="/css/questions.css?v=11">
+  <link rel="stylesheet" href="/css/futuristic.css?v=3">
 </head>
 <body>
   <main class="questions-page">
@@ -30,7 +30,10 @@
 
     <section class="content-panel">
       <div class="question-shell">
-        <button class="back-link" id="backButton" type="button">← Back</button>
+        <div class="page-actions">
+          <button class="back-link" id="backButton" type="button">← Back</button>
+          <button class="logout-button" type="button" id="logoutButton" hidden>Logout</button>
+        </div>
         <div class="voice-banner"><span>🤖</span><strong>Answer a few simple questions</strong></div>
         <header>
           <p id="categoryLabel" class="eyebrow"></p>
@@ -43,7 +46,7 @@
     </section>
   </main>
   <div id="toast" class="toast"></div>
-  <script src="/js/questions.js?v=10"></script>
-  <script src="/js/futuristic-ui.js?v=1"></script>
+  <script src="/js/questions.js?v=14"></script>
+  <script src="/js/futuristic-ui.js?v=2"></script>
 </body>
 </html>

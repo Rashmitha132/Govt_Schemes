@@ -290,18 +290,18 @@ let lastSpokenStep = -1;
 let latestRecommendationMeta = {};
 
 function isUserLoggedIn() {
-  if (localStorage.getItem("yojanMitraLoggedIn") === "true") {
+  const token = localStorage.getItem("yojanMitraAuthToken");
+  const user = localStorage.getItem("loggedInUser");
+  const isLoggedIn = localStorage.getItem("yojanMitraLoggedIn") === "true";
+
+  if (token && user && isLoggedIn) {
     return true;
   }
 
-  return ["loggedInUser", "currentUser", "user"].some((key) => {
-    try {
-      const value = localStorage.getItem(key);
-      return Boolean(value && JSON.parse(value));
-    } catch (error) {
-      return Boolean(localStorage.getItem(key));
-    }
-  });
+  localStorage.removeItem("yojanMitraLoggedIn");
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("yojanMitraUserId");
+  return false;
 }
 
 function redirectToLoginForEligibility() {
@@ -313,11 +313,30 @@ function redirectToLoginForEligibility() {
   }, 800);
 }
 
+function logoutUser() {
+  localStorage.removeItem("yojanMitraAuthToken");
+  localStorage.removeItem("yojanMitraLoggedIn");
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("user");
+  localStorage.removeItem("yojanMitraUserId");
+  localStorage.removeItem("postLoginRedirect");
+  showToast("Logged out");
+  setTimeout(() => {
+    window.location.href = "/category.html";
+  }, 500);
+}
+
+function renderAuthActions() {
+  logoutButton.hidden = !isUserLoggedIn();
+}
+
 const categoryLabel = document.getElementById("categoryLabel");
 const stepLabel = document.getElementById("stepLabel");
 const questionCard = document.getElementById("questionCard");
 const resultList = document.getElementById("resultList");
 const toast = document.getElementById("toast");
+const logoutButton = document.getElementById("logoutButton");
 const title = document.querySelector("header h2");
 const questionShell = document.querySelector(".question-shell");
 const voiceTitle = document.querySelector(".voice-banner strong");
@@ -497,6 +516,11 @@ function renderQuestion() {
       return;
     }
 
+    if (step === 0 && !isUserLoggedIn()) {
+      redirectToLoginForEligibility();
+      return;
+    }
+
     if (step === questions.length - 1) {
       submitAnswers();
       return;
@@ -643,5 +667,11 @@ featurePasswordNative.textContent = text.featurePassword;
 featureQuestionsNative.textContent = text.featureQuestions;
 featureDocumentsNative.textContent = text.featureDocuments;
 document.getElementById("backButton").addEventListener("click", () => window.history.back());
+logoutButton.addEventListener("click", logoutUser);
 voiceBanner.addEventListener("click", () => speak(getQuestionSpeech(questions[step])));
-renderQuestion();
+if (!isUserLoggedIn()) {
+  redirectToLoginForEligibility();
+} else {
+  renderAuthActions();
+  renderQuestion();
+}

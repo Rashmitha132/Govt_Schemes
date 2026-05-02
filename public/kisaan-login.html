@@ -1628,6 +1628,7 @@
           loginMethod: "otp"
         }));
         localStorage.setItem("yojanMitraUserId", (result.user && (result.user.id || result.user.phone)) || `+91${state.phone}`);
+        localStorage.setItem("yojanMitraAuthToken", `otp-${Date.now()}-${Math.random().toString(36).slice(2)}`);
         showToast(result.message || (auto ? "OTP auto-submitted" : "Login verified"));
         showScreen("welcome");
       } catch (error) {
