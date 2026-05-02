@@ -10,6 +10,7 @@ const applicationRoutes = require("./routes/applicationRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
 
 const app = express();
+const frontendPublicPath = path.join(__dirname, "..", "frontend", "public");
 
 app.use(cors());
 app.use(express.json());
@@ -25,17 +26,17 @@ app.use("/api", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "kisaan-login.html"));
+  res.sendFile(path.join(frontendPublicPath, "kisaan-login.html"));
 });
 
 app.get("/questions", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "questions.html"));
+  res.sendFile(path.join(frontendPublicPath, "questions.html"));
 });
 
 app.get("/apply-assistant/:schemeId", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "apply-assistant.html"));
+  res.sendFile(path.join(frontendPublicPath, "apply-assistant.html"));
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(frontendPublicPath));
 
 module.exports = app;

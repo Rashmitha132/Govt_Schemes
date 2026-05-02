@@ -1,0 +1,9 @@
+{
+  "name": "ui_ai-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static frontend assets served by the backend Express app.",
+  "scripts": {
+    "start": "echo \"Open public/index.html directly or run the backend server from ../backend\""
+  }
+}
