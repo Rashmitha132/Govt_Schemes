@@ -90,6 +90,158 @@ const copy = {
 };
 
 const activeCopy = copy[language] || copy.hi;
+const categoryTranslations = {
+  farmer: {
+    en: "Farmer",
+    as: "কৃষক",
+    bn: "কৃষক",
+    brx: "आबादगिरि",
+    doi: "किसान",
+    gu: "ખેડૂત",
+    hi: "किसान",
+    kn: "ರೈತ",
+    ks: "کسان",
+    kok: "शेतकार",
+    mai: "किसान",
+    ml: "കർഷകൻ",
+    mni: "ꯂꯧꯎ-ꯁꯤꯡꯎ",
+    mr: "शेतकरी",
+    ne: "किसान",
+    or: "ଚାଷୀ",
+    pa: "ਕਿਸਾਨ",
+    sa: "कृषकः",
+    sat: "ᱪᱟᱥᱟᱹ",
+    sd: "هاري",
+    ta: "விவசாயி",
+    te: "రైతు",
+    ur: "کسان"
+  },
+  woman: {
+    en: "Woman",
+    as: "মহিলা",
+    bn: "মহিলা",
+    brx: "महिला",
+    doi: "महिला",
+    gu: "મહિલા",
+    hi: "महिला",
+    kn: "ಮಹಿಳೆ",
+    ks: "خاتون",
+    kok: "बायल",
+    mai: "महिला",
+    ml: "സ്ത്രീ",
+    mni: "ꯅꯨꯄꯤ",
+    mr: "महिला",
+    ne: "महिला",
+    or: "ମହିଳା",
+    pa: "ਮਹਿਲਾ",
+    sa: "महिला",
+    sat: "ᱢᱟᱹᱭᱡᱤᱭᱩ",
+    sd: "عورت",
+    ta: "பெண்",
+    te: "మహిళ",
+    ur: "خاتون"
+  },
+  senior: {
+    en: "Senior",
+    as: "জ্যেষ্ঠ নাগৰিক",
+    bn: "প্রবীণ",
+    brx: "बुजुर्ग",
+    doi: "बुजुर्ग",
+    gu: "વરિષ્ઠ નાગરિક",
+    hi: "बुजुर्ग",
+    kn: "ಹಿರಿಯರು",
+    ks: "بزرگ",
+    kok: "ज्येष्ठ नागरिक",
+    mai: "बुजुर्ग",
+    ml: "മുതിർന്നവർ",
+    mni: "ꯑꯍꯜ",
+    mr: "ज्येष्ठ नागरिक",
+    ne: "ज्येष्ठ नागरिक",
+    or: "ବରିଷ୍ଠ ନାଗରିକ",
+    pa: "ਬਜ਼ੁਰਗ",
+    sa: "वरिष्ठः",
+    sat: "ᱢᱟᱨᱟᱝ",
+    sd: "بزرگ",
+    ta: "மூத்தவர்",
+    te: "వృద్ధులు",
+    ur: "بزرگ"
+  },
+  family: {
+    en: "Family",
+    as: "পৰিয়াল",
+    bn: "পরিবার",
+    brx: "परिवार",
+    doi: "परिवार",
+    gu: "પરિવાર",
+    hi: "परिवार",
+    kn: "ಕುಟುಂಬ",
+    ks: "خاندان",
+    kok: "कुटुंब",
+    mai: "परिवार",
+    ml: "കുടുംബം",
+    mni: "ꯏꯃꯨꯡ",
+    mr: "कुटुंब",
+    ne: "परिवार",
+    or: "ପରିବାର",
+    pa: "ਪਰਿਵਾਰ",
+    sa: "परिवारः",
+    sat: "ᱚᱲᱟᱜ",
+    sd: "خاندان",
+    ta: "குடும்பம்",
+    te: "కుటుంబం",
+    ur: "خاندان"
+  },
+  business: {
+    en: "Business",
+    as: "ব্যৱসায়",
+    bn: "ব্যবসা",
+    brx: "व्यापार",
+    doi: "कारोबार",
+    gu: "વ્યવસાય",
+    hi: "व्यवसाय",
+    kn: "ವ್ಯಾಪಾರ",
+    ks: "کاروبار",
+    kok: "वेवसाय",
+    mai: "व्यवसाय",
+    ml: "വ്യാപാരം",
+    mni: "ꯂꯜꯂꯣꯟ",
+    mr: "व्यवसाय",
+    ne: "व्यवसाय",
+    or: "ବ୍ୟବସାୟ",
+    pa: "ਕਾਰੋਬਾਰ",
+    sa: "व्यवसायः",
+    sat: "ᱵᱮᱯᱟᱨ",
+    sd: "ڪاروبار",
+    ta: "வணிகம்",
+    te: "వ్యాపారం",
+    ur: "کاروبار"
+  },
+  student: {
+    en: "Student",
+    as: "ছাত্ৰ",
+    bn: "ছাত্র",
+    brx: "विद्यार्थी",
+    doi: "विद्यार्थी",
+    gu: "વિદ્યાર્થી",
+    hi: "विद्यार्थी",
+    kn: "ವಿದ್ಯಾರ್ಥಿ",
+    ks: "طالب علم",
+    kok: "विद्यार्थी",
+    mai: "विद्यार्थी",
+    ml: "വിദ്യാർത്ഥി",
+    mni: "ꯃꯍꯩꯔꯣꯏ",
+    mr: "विद्यार्थी",
+    ne: "विद्यार्थी",
+    or: "ଛାତ୍ର",
+    pa: "ਵਿਦਿਆਰਥੀ",
+    sa: "विद्यार्थी",
+    sat: "ᱯᱟᱲᱦᱟᱣᱟᱜ",
+    sd: "شاگرد",
+    ta: "மாணவர்",
+    te: "విద్యార్థి",
+    ur: "طالب علم"
+  }
+};
 const speechLangCodes = {
   as: "as-IN",
   bn: "bn-IN",
@@ -124,8 +276,17 @@ function showToast(message) {
 }
 
 function getLocalName(category) {
+  const translatedName = categoryTranslations[category.id]?.[language];
+  if (translatedName) {
+    return translatedName;
+  }
+
   if (language === "kn" && category.localNameKn) {
     return category.localNameKn;
+  }
+
+  if (language === "en") {
+    return category.name;
   }
 
   return category.localName || category.name;
@@ -142,7 +303,7 @@ function speakPrompt() {
   }
 
   window.speechSynthesis.cancel();
-  const text = `${activeCopy.prompt}. Who are you? Tap your category.`;
+  const text = activeCopy.prompt;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = getSpeechLang();
   utterance.rate = 0.92;
@@ -169,6 +330,7 @@ async function postJson(url, data) {
 function renderCategories() {
   categoriesGrid.innerHTML = categories.map((category) => {
     const isSelected = selectedCategory === category.id;
+    const categoryName = getLocalName(category);
     return `
       <button
         class="category-option ${isSelected ? "selected" : ""}"
@@ -178,8 +340,7 @@ function renderCategories() {
         aria-pressed="${isSelected}"
       >
         <span class="category-icon" aria-hidden="true">${category.icon}</span>
-        <span class="category-name">${category.name}</span>
-        <span class="category-subtitle">${getLocalName(category)}</span>
+        <span class="category-name">${categoryName}</span>
         <span class="scheme-count">${category.schemeCount} ${activeCopy.schemes}</span>
       </button>
     `;
@@ -257,7 +418,7 @@ voiceButton.addEventListener("click", speakPrompt);
 
 headingNativeText.textContent = activeCopy.heading;
 voiceNativeText.textContent = activeCopy.prompt;
-nextNativeText.textContent = activeCopy.next;
+nextButton.textContent = activeCopy.next;
 featureVoiceNative.textContent = activeCopy.featureVoice;
 featurePasswordNative.textContent = activeCopy.featurePassword;
 featureExploreNative.textContent = activeCopy.featureExplore;
