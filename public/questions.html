@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions | YojanMitra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/questions.css?v=10">
+</head>
+<body>
+  <main class="questions-page">
+    <aside class="brand-panel">
+      <div class="brand-lockup">
+        <div class="brand-logo"><img src="/logo.jpeg" alt="YojanMitra logo"></div>
+        <div>
+          <h1>YojanMitra</h1>
+          <p class="brand-tagline">हर योजना, आपके साथ</p>
+        </div>
+      </div>
+      <ul class="feature-list" aria-label="YojanMitra features">
+        <li><span>🎙️</span><strong>Voice guided</strong><small id="featureVoiceNative">Voice assistance</small></li>
+        <li><span>🔑</span><strong>No password needed</strong><small id="featurePasswordNative">No password needed</small></li>
+        <li><span>🌱</span><strong>Simple questions</strong><small id="featureQuestionsNative">Easy scheme matching</small></li>
+        <li><span>📄</span><strong>Documents listed</strong><small id="featureDocumentsNative">Know what to keep ready</small></li>
+      </ul>
+    </aside>
+
+    <section class="content-panel">
+      <div class="question-shell">
+        <button class="back-link" id="backButton" type="button">← Back</button>
+        <div class="voice-banner"><span>🤖</span><strong>Answer a few simple questions</strong></div>
+        <header>
+          <p id="categoryLabel" class="eyebrow"></p>
+          <h2>Find schemes for you</h2>
+          <p id="stepLabel"></p>
+        </header>
+        <section id="questionCard" class="question-card"></section>
+        <section id="resultList" class="result-list"></section>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="/js/questions.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assisted Apply | YojanMitra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/apply-assistant.css?v=3">
+</head>
+<body>
+  <main class="apply-page">
+    <section class="assistant-shell">
+      <header class="top-bar">
+        <button class="back-link" type="button" id="backButton">Back</button>
+        <div class="brand-lockup">
+          <img src="/logo.jpeg" alt="YojanMitra logo">
+          <div>
+            <strong>YojanMitra</strong>
+            <span id="flowTitle">AI Assisted Apply</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="scheme-strip">
+        <p id="stepText">Loading...</p>
+        <h1 id="schemeName">Loading scheme...</h1>
+        <div id="statusBadge" class="status-badge">Incomplete</div>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progressBar"></span>
+        </div>
+      </section>
+
+      <section class="voice-card" aria-live="polite">
+        <div class="assistant-face" aria-hidden="true">AI</div>
+        <p id="assistantMessage">Please wait. AI is preparing your application helper.</p>
+        <div class="voice-actions">
+          <button id="repeatButton" class="small-action" type="button">Hear again</button>
+          <button id="voiceAnswerButton" class="small-action" type="button">Speak Yes/No</button>
+        </div>
+      </section>
+
+      <section class="question-card">
+        <p class="question-label" id="questionLabel">Document question</p>
+        <h2 id="documentQuestion">Loading documents...</h2>
+
+        <div class="choice-grid">
+          <button id="yesButton" class="choice-button yes" type="button">
+            <span>YES</span>
+            <strong id="yesText">Yes, I have it</strong>
+          </button>
+          <button id="noButton" class="choice-button no" type="button">
+            <span>NO</span>
+            <strong id="noText">No, I do not have it</strong>
+          </button>
+        </div>
+
+        <div id="uploadPanel" class="upload-panel" hidden>
+          <label for="documentUpload" id="uploadLabel">Upload or capture photo</label>
+          <input id="documentUpload" type="file" accept="image/*,.pdf" capture="environment">
+          <button id="skipUploadButton" class="small-action" type="button">I will upload later</button>
+        </div>
+      </section>
+
+      <section class="status-panel">
+        <div>
+          <strong id="availableTitle">Available documents</strong>
+          <div id="availableDocuments" class="pill-list"></div>
+        </div>
+        <div>
+          <strong id="missingTitle">Missing documents</strong>
+          <div id="missingDocuments" class="pill-list"></div>
+        </div>
+      </section>
+
+      <section id="finalPanel" class="final-panel" hidden>
+        <h2 id="finalTitle">Application draft</h2>
+        <p id="draftSummary">AI is preparing your draft.</p>
+        <p class="safety-line" id="safetyLine">AI will prepare your application and guide you. Final submission happens only on the official government portal or official API.</p>
+        <div class="final-actions">
+          <button id="saveDraftButton" class="secondary-button" type="button">Save as Draft</button>
+          <button id="continueButton" class="primary-button" type="button" disabled>Confirm & Apply</button>
+        </div>
+      </section>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/js/apply-assistant.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YojanMitra Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Gujarati:wght@400;500;700&family=Noto+Sans+Gurmukhi:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&family=Noto+Sans+Malayalam:wght@400;500;700&family=Noto+Sans+Meetei+Mayek:wght@400;500;700&family=Noto+Sans+Ol+Chiki:wght@400;500;700&family=Noto+Sans+Oriya:wght@400;500;700&family=Noto+Sans+Tamil:wght@400;500;700&family=Noto+Sans+Telugu:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a7a4a;
+      --light-green: #f0faf4;
+      --border-green: #c5e8d5;
+      --warning-bg: #fffbf0;
+      --warning-border: #e6c97a;
+      --green-text: #ffffff;
+      --secondary: #666666;
+      --ink: #1d2c24;
+      --surface: #ffffff;
+      --radius: 12px;
+      --shadow: 0 18px 45px rgba(16, 76, 46, 0.13);
+      --font: "Baloo 2", "Noto Sans Devanagari", "Noto Sans Kannada", "Noto Sans Tamil", "Noto Sans Telugu", "Noto Sans Bengali", "Noto Sans Gujarati", "Noto Sans Gurmukhi", "Noto Sans Malayalam", "Noto Sans Meetei Mayek", "Noto Sans Ol Chiki", "Noto Sans Oriya", "Noto Nastaliq Urdu", "Noto Sans", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--light-green);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: none;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    .screen.active {
+      display: flex;
+      animation: fadeSlide 300ms ease forwards;
+    }
+
+    @keyframes fadeSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .language-screen {
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 24px;
+      background:
+        linear-gradient(135deg, rgba(26, 122, 74, 0.1), rgba(255, 251, 240, 0.88)),
+        var(--light-green);
+      overflow-y: auto;
+    }
+
+    .language-shell {
+      width: min(1060px, 100%);
+    }
+
+    .language-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-mark {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      background: var(--surface);
+      border: 2px solid var(--border-green);
+      color: var(--primary);
+      font-size: 24px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .brand-mark img,
+    .logo-icon img,
+    .welcome-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.04;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .language-header p {
+      margin-top: 8px;
+      color: var(--secondary);
+      font-size: 18px;
+    }
+
+    .language-header .header-tagline {
+      margin-top: 6px;
+      color: var(--primary);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .language-header .language-subtitle {
+      margin-top: 8px;
+    }
+
+    .language-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+    }
+
+    .language-card {
+      min-height: 142px;
+      border: 2px solid var(--border-green);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 18px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+      box-shadow: 0 8px 18px rgba(24, 98, 61, 0.07);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .language-card:hover,
+    .language-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+      outline: none;
+    }
+
+    .native-name {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .english-name {
+      display: block;
+      margin-top: 8px;
+      color: var(--secondary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .speaker-btn {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--light-green);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex: 0 0 auto;
+    }
+
+    .speaker-btn:hover,
+    .speaker-btn:focus-visible {
+      background: var(--primary);
+      color: var(--green-text);
+      outline: none;
+    }
+
+    .app-screen {
+      background: #f7fbf8;
+      align-items: stretch;
+    }
+
+    .left-panel {
+      width: 40%;
+      min-height: 100vh;
+      padding: 48px;
+      background: var(--primary);
+      color: var(--green-text);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--green-text);
+      font-size: 19px;
+      font-weight: 700;
+      overflow: hidden;
+    }
+
+    .app-name {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tagline {
+      max-width: 420px;
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 600;
+      margin: 0 0 32px;
+    }
+
+    .tagline span,
+    .feature-text span,
+    .bilingual span,
+    .form-title span,
+    .welcome-message span,
+    .field-label span,
+    .primary-btn span,
+    .secondary-btn span,
+    .explore-strip span {
+      display: block;
+    }
+
+    .form-title .native-line {
+      margin-top: 6px;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .explore-strip {
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .native-line {
+      opacity: 0.92;
+    }
+
+    .features {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .feature-text {
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    .right-panel {
+      width: 60%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .form-card {
+      width: min(460px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--border-green);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      color: var(--ink);
+    }
+
+    .voice-chip {
+      min-height: 44px;
+      border: 0;
+      border-radius: 20px;
+      background: var(--primary);
+      color: var(--green-text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .voice-chip.speaking {
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(26, 122, 74, 0.32);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(26, 122, 74, 0);
+      }
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .phone-row {
+      display: flex;
+      min-height: 58px;
+      border: 2px solid var(--border-green);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .phone-row:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(26, 122, 74, 0.12);
+    }
+
+    .country-code {
+      min-width: 92px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid var(--border-green);
+      background: var(--light-green);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .phone-input {
+      width: 100%;
+      border: 0;
+      padding: 12px 14px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .explore-strip {
+      width: 100%;
+      border-radius: var(--radius);
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .primary-btn {
+      margin-top: 18px;
+      border: 0;
+      background: var(--primary);
+      color: var(--green-text);
+      box-shadow: 0 10px 20px rgba(26, 122, 74, 0.18);
+    }
+
+    .primary-btn:hover,
+    .primary-btn:focus-visible {
+      filter: brightness(0.94);
+      outline: none;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 18px 0;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: #d8eadf;
+    }
+
+    .secondary-btn {
+      border: 2px solid var(--border-green);
+      background: var(--surface);
+      color: var(--primary);
+    }
+
+    .secondary-btn:hover,
+    .secondary-btn:focus-visible {
+      background: var(--light-green);
+      outline: none;
+    }
+
+    .explore-strip {
+      margin-top: 18px;
+      border: 1px solid var(--warning-border);
+      background: var(--warning-bg);
+      color: #5b4510;
+      padding: 12px;
+      text-decoration: none;
+    }
+
+    .explore-strip:hover,
+    .explore-strip:focus-visible {
+      outline: 3px solid rgba(230, 201, 122, 0.4);
+    }
+
+    .otp-card {
+      position: relative;
+    }
+
+    .back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-green);
+      background: var(--surface);
+      color: var(--primary);
+      font-size: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .otp-subtext {
+      margin-bottom: 20px;
+      color: var(--secondary);
+      line-height: 1.35;
+    }
+
+    .otp-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 18px;
+    }
+
+    .otp-input {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      min-height: 64px;
+      border: 2px solid var(--border-green);
+      border-radius: var(--radius);
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .otp-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(26, 122, 74, 0.12);
+    }
+
+    .otp-input.filled {
+      animation: fillBounce 220ms ease;
+    }
+
+    @keyframes fillBounce {
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .resend-link {
+      display: inline-flex;
+      margin-top: 16px;
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 700;
+      padding: 4px 0;
+    }
+
+    .welcome-card {
+      text-align: center;
+    }
+
+    .welcome-badge {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      background: var(--light-green);
+      border: 2px solid var(--border-green);
+      color: var(--primary);
+      font-size: 26px;
+      font-weight: 700;
+      box-shadow: 0 12px 26px rgba(26, 122, 74, 0.12);
+      overflow: hidden;
+    }
+
+    .welcome-phone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      margin: 18px 0 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--light-green);
+      border: 1px solid var(--border-green);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .welcome-message {
+      margin-top: 10px;
+      color: var(--secondary);
+      line-height: 1.45;
+      font-size: 17px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(24px);
+      min-width: min(320px, calc(100vw - 32px));
+      padding: 12px 16px;
+      border-radius: 20px;
+      background: #222;
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .app-screen.active {
+        display: block;
+      }
+
+      .left-panel {
+        width: 100%;
+        min-height: auto;
+        padding: 18px 20px;
+      }
+
+      .logo-row {
+        margin-bottom: 0;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 28px;
+      }
+
+      .app-name {
+        font-size: 27px;
+      }
+
+      .features {
+        display: none;
+      }
+
+      .tagline {
+        display: block;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      .right-panel {
+        width: 100%;
+        min-height: calc(100vh - 84px);
+        padding: 20px;
+        align-items: flex-start;
+      }
+
+      .form-card {
+        padding: 20px;
+        border-radius: var(--radius);
+      }
+
+      .language-screen {
+        padding: 18px;
+        align-items: flex-start;
+      }
+
+      .language-header {
+        margin-top: 12px;
+      }
+
+      .language-header p {
+        font-size: 16px;
+      }
+
+      .language-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .language-card {
+        min-height: 126px;
+        padding: 14px;
+      }
+
+      .native-name {
+        font-size: 22px;
+      }
+
+      .english-name {
+        font-size: 14px;
+      }
+
+      .speaker-btn {
+        width: 38px;
+        height: 38px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .language-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-input {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section id="languageScreen" class="screen language-screen active" aria-labelledby="languageTitle">
+      <div class="language-shell">
+        <header class="language-header">
+          <div class="brand-mark" aria-hidden="true">
+            <img src="logo.jpeg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='YM';">
+          </div>
+          <h1 id="languageTitle">YojanMitra</h1>
+          <p class="header-tagline">हर योजना, आपके साथ</p>
+          <p class="language-subtitle">Choose your comfortable language</p>
+        </header>
+        <div id="languageGrid" class="language-grid" aria-label="Language options"></div>
+      </div>
+    </section>
+
+    <section id="loginScreen" class="screen app-screen" aria-labelledby="loginTitle">
+      <aside class="left-panel">
+        <div class="logo-row">
+          <div class="logo-icon" aria-hidden="true">
+            <img src="logo.jpeg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='YM';">
+          </div>
+          <div class="brand-copy">
+            <div class="app-name">YojanMitra</div>
+            <p id="tagline" class="tagline bilingual"></p>
+          </div>
+        </div>
+        <ul id="featureList" class="features"></ul>
+      </aside>
+      <section class="right-panel">
+        <form id="loginForm" class="form-card" autocomplete="on">
+          <button id="voiceChip" class="voice-chip" type="button">🎙️ <span id="voiceChipText"></span></button>
+          <h2 id="loginTitle" class="form-title">Login</h2>
+          <label id="phoneLabel" class="field-label" for="phoneInput"></label>
+          <div class="phone-row">
+            <span class="country-code">+91 🇮🇳</span>
+            <input id="phoneInput" class="phone-input" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="10" autocomplete="tel-national" aria-describedby="phoneLabel">
+          </div>
+          <button id="getOtpButton" class="primary-btn" type="submit"></button>
+          <div id="dividerText" class="divider"></div>
+          <button id="missedCallButton" class="secondary-btn" type="button"></button>
+          <a id="exploreStrip" class="explore-strip" href="#"></a>
+        </form>
+      </section>
+    </section>
+
+    <section id="otpScreen" class="screen app-screen" aria-labelledby="otpTitle">
+      <aside class="left-panel">
+        <div class="logo-row">
+          <div class="logo-icon" aria-hidden="true">
+            <img src="logo.jpeg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='YM';">
+          </div>
+          <div class="brand-copy">
+            <div class="app-name">YojanMitra</div>
+            <p id="otpTagline" class="tagline bilingual"></p>
+          </div>
+        </div>
+      </aside>
+      <section class="right-panel">
+        <div class="form-card otp-card">
+          <button id="backButton" class="back-btn" type="button" aria-label="Back to login">←</button>
+          <h2 id="otpTitle" class="form-title"></h2>
+          <p id="otpSubtext" class="otp-subtext"></p>
+          <div class="otp-grid" aria-label="Enter 4 digit OTP">
+            <input class="otp-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="OTP digit 1">
+            <input class="otp-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="OTP digit 2">
+            <input class="otp-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="OTP digit 3">
+            <input class="otp-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="OTP digit 4">
+          </div>
+          <button id="verifyButton" class="primary-btn" type="button"></button>
+          <button id="resendButton" class="resend-link" type="button"></button>
+        </div>
+      </section>
+    </section>
+
+    <section id="welcomeScreen" class="screen app-screen" aria-labelledby="welcomeTitle">
+      <aside class="left-panel">
+        <div class="logo-row">
+          <div class="logo-icon" aria-hidden="true">
+            <img src="logo.jpeg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='YM';">
+          </div>
+          <div class="brand-copy">
+            <div class="app-name">YojanMitra</div>
+            <p id="welcomeTagline" class="tagline bilingual"></p>
+          </div>
+        </div>
+        <ul class="features">
+          <li class="feature-item">
+            <span class="feature-icon" aria-hidden="true">✅</span>
+            <span class="feature-text">
+              <span>Login verified</span>
+              <span id="welcomeVerifiedText" class="native-line"></span>
+            </span>
+          </li>
+        </ul>
+      </aside>
+      <section class="right-panel">
+        <div class="form-card welcome-card">
+          <div class="welcome-badge" aria-hidden="true">
+            <img src="logo.jpeg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='YM';">
+          </div>
+          <h2 id="welcomeTitle" class="form-title"></h2>
+          <div id="welcomePhone" class="welcome-phone"></div>
+          <p id="welcomeMessage" class="welcome-message"></p>
+          <button id="getStartedButton" class="primary-btn" type="button"></button>
+        </div>
+      </section>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const languages = [
+      { key: "as", english: "Assamese", native: "অসমীয়া", lang: "as-IN" },
+      { key: "bn", english: "Bengali", native: "বাংলা", lang: "bn-IN" },
+      { key: "brx", english: "Bodo", native: "बड़ो", lang: "brx-IN" },
+      { key: "doi", english: "Dogri", native: "डोगरी", lang: "doi-IN" },
+      { key: "en", english: "English", native: "English", lang: "en-IN" },
+      { key: "gu", english: "Gujarati", native: "ગુજરાતી", lang: "gu-IN" },
+      { key: "hi", english: "Hindi", native: "हिंदी", lang: "hi-IN" },
+      { key: "kn", english: "Kannada", native: "ಕನ್ನಡ", lang: "kn-IN" },
+      { key: "ks", english: "Kashmiri", native: "कॉशुर", lang: "ks-IN" },
+      { key: "kok", english: "Konkani", native: "कोंकणी", lang: "kok-IN" },
+      { key: "mai", english: "Maithili", native: "मैथिली", lang: "mai-IN" },
+      { key: "ml", english: "Malayalam", native: "മലയാളം", lang: "ml-IN" },
+      { key: "mni", english: "Manipuri", native: "ꯃꯤꯇꯩꯂꯣꯟ", lang: "mni-IN" },
+      { key: "mr", english: "Marathi", native: "मराठी", lang: "mr-IN" },
+      { key: "ne", english: "Nepali", native: "नेपाली", lang: "ne-IN" },
+      { key: "or", english: "Odia", native: "ଓଡ଼ିଆ", lang: "or-IN" },
+      { key: "pa", english: "Punjabi", native: "ਪੰਜਾਬੀ", lang: "pa-IN" },
+      { key: "sa", english: "Sanskrit", native: "संस्कृतम्", lang: "sa-IN" },
+      { key: "sat", english: "Santali", native: "ᱥᱟᱱᱛᱟᱲᱤ", lang: "sat-IN" },
+      { key: "sd", english: "Sindhi", native: "سنڌي", lang: "sd-IN" },
+      { key: "ta", english: "Tamil", native: "தமிழ்", lang: "ta-IN" },
+      { key: "te", english: "Telugu", native: "తెలుగు", lang: "te-IN" },
+      { key: "ur", english: "Urdu", native: "اردو", lang: "ur-IN" }
+    ];
+
+    const englishText = {
+      appTagline: "हर योजना, आपके साथ",
+      enterMobilePrompt: "Enter your mobile number",
+      enterMobileLabel: "Mobile number",
+      getOTP: "Get OTP",
+      missedCallLogin: "Missed call login",
+      exploreWithoutLogin: "Explore without login",
+      otpScreenTitle: "Enter OTP",
+      enterOTPPrompt: "Enter your OTP",
+      verifyLogin: "Verify & Login",
+      resendOTP: "Resend OTP",
+      welcomeTitle: "Welcome to YojanMitra",
+      welcomeMessage: "You are signed in with this mobile number. Let us help you find the right schemes.",
+      welcomeVoice: "Welcome to YojanMitra. Let us help you find the right schemes.",
+      getStarted: "Get Started",
+      loginVerified: "Login verified",
+      orDivider: "or",
+      features: ["Voice guided", "No password needed", "Explore without login", "Missed call login"]
+    };
+
+    const hindiText = {
+      appTagline: "हर योजना, आपके साथ",
+      enterMobilePrompt: "आपका मोबाइल नंबर डालिए",
+      enterMobileLabel: "मोबाइल नंबर",
+      getOTP: "OTP पाइए",
+      missedCallLogin: "मिस्ड कॉल लॉगिन",
+      exploreWithoutLogin: "बिना लॉगिन देखिए",
+      otpScreenTitle: "OTP डालें",
+      enterOTPPrompt: "आपका OTP दर्ज करें",
+      verifyLogin: "सत्यापित करें और लॉगिन करें",
+      resendOTP: "OTP फिर भेजें",
+      welcomeTitle: "YojanMitra में आपका स्वागत है",
+      welcomeMessage: "आप इस मोबाइल नंबर से लॉगिन हो गए हैं। आइए, आपके लिए सही योजनाएं ढूंढते हैं।",
+      welcomeVoice: "YojanMitra में आपका स्वागत है। आइए, आपके लिए सही योजनाएं ढूंढते हैं।",
+      getStarted: "शुरू करें",
+      loginVerified: "लॉगिन सत्यापित हो गया",
+      orDivider: "या",
+      features: ["आवाज़ से मदद", "पासवर्ड की जरूरत नहीं", "बिना लॉगिन जानकारी देखें", "मिस्ड कॉल से लॉगिन"]
+    };
+
+    const languageConfirmText = {
+      as: "ঠিক আছে! অসমীয়াত আগবাঢ়ো",
+      bn: "ঠিক আছে! বাংলায় চালিয়ে যাই",
+      brx: "ठीक है! बड़ो में आगे बढ़ते हैं",
+      doi: "ठीक है! डोगरी में आगे बढ़ते हैं",
+      en: "Okay! Continuing in English",
+      gu: "બરાબર! ગુજરાતીમાં આગળ વધીએ",
+      hi: "ठीक है! हिंदी में आगे बढ़ते हैं",
+      kn: "ಆಯ್ತು! ಕನ್ನಡದಲ್ಲಿ ಮುಂದುವರಿಯೋಣ",
+      ks: "ठीक है! कॉशुर में आगे बढ़ते हैं",
+      kok: "बरें! कोंकणींत फुडें वचूंया",
+      mai: "ठीक अछि! मैथिली में आगू बढ़ैत छी",
+      ml: "ശരി! മലയാളത്തിൽ തുടരാം",
+      mni: "ꯌꯥꯢ! ꯃꯤꯇꯩꯂꯣꯟꯗ ꯃꯈꯥ ꯆꯠꯂꯤ",
+      mr: "ठीक आहे! मराठीत पुढे जाऊया",
+      ne: "ठीक छ! नेपालीमा अघि बढौं",
+      or: "ଠିକ ଅଛି! ଓଡ଼ିଆରେ ଆଗକୁ ବଢ଼ିବା",
+      pa: "ਠੀਕ ਹੈ! ਪੰਜਾਬੀ ਵਿੱਚ ਅੱਗੇ ਵਧੀਏ",
+      sa: "अस्तु! संस्कृतेन अग्रे गच्छामः",
+      sat: "ᱴᱷᱤᱠ ᱜᱮ! ᱥᱟᱱᱛᱟᱲᱤ ᱛᱮ ᱞᱟᱦᱟ ᱪᱟᱞᱟᱣ",
+      sd: "ٺيڪ آهي! سنڌي ۾ اڳتي وڌون ٿا",
+      ta: "சரி! தமிழில் தொடரலாம்",
+      te: "సరే! తెలుగులో కొనసాగుదాం",
+      ur: "ٹھیک ہے! اردو میں آگے بڑھتے ہیں"
+    };
+
+    const localizedText = {
+      as: { ...hindiText },
+      bn: {
+        ...hindiText,
+        enterMobilePrompt: "আপনার মোবাইল নম্বর লিখুন",
+        enterMobileLabel: "মোবাইল নম্বর",
+        getOTP: "OTP পান",
+        missedCallLogin: "মিসড কল লগইন",
+        exploreWithoutLogin: "লগইন ছাড়া দেখুন",
+        otpScreenTitle: "OTP লিখুন",
+        enterOTPPrompt: "আপনার OTP লিখুন",
+        verifyLogin: "যাচাই করে লগইন করুন",
+        resendOTP: "OTP আবার পাঠান",
+        orDivider: "অথবা",
+        features: ["ভয়েস গাইডেড", "পাসওয়ার্ড লাগবে না", "লগইন ছাড়া তথ্য দেখুন", "মিসড কলে লগইন"]
+      },
+      en: {
+        ...englishText,
+        enterMobilePrompt: "Please enter your mobile number",
+        languageConfirm: languageConfirmText.en
+      },
+      gu: {
+        ...hindiText,
+        enterMobilePrompt: "તમારો મોબાઇલ નંબર દાખલ કરો",
+        enterMobileLabel: "મોબાઇલ નંબર",
+        getOTP: "OTP મેળવો",
+        missedCallLogin: "મિસ્ડ કોલ લોગિન",
+        exploreWithoutLogin: "લોગિન વગર જુઓ",
+        otpScreenTitle: "OTP દાખલ કરો",
+        enterOTPPrompt: "તમારો OTP દાખલ કરો",
+        verifyLogin: "ચકાસો અને લોગિન કરો",
+        resendOTP: "OTP ફરી મોકલો",
+        orDivider: "અથવા",
+        features: ["અવાજ માર્ગદર્શન", "પાસવર્ડની જરૂર નથી", "લોગિન વગર માહિતી જુઓ", "મિસ્ડ કોલથી લોગિન"]
+      },
+      hi: { ...hindiText },
+      kn: {
+        ...hindiText,
+        enterMobilePrompt: "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
+        enterMobileLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+        getOTP: "OTP ಪಡೆಯಿರಿ",
+        missedCallLogin: "ಮಿಸ್ಡ್ ಕಾಲ್ ಲಾಗಿನ್",
+        exploreWithoutLogin: "ಲಾಗಿನ್ ಇಲ್ಲದೆ ನೋಡಿ",
+        otpScreenTitle: "OTP ನಮೂದಿಸಿ",
+        enterOTPPrompt: "ನಿಮ್ಮ OTP ನಮೂದಿಸಿ",
+        verifyLogin: "ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಲಾಗಿನ್ ಮಾಡಿ",
+        resendOTP: "OTP ಮತ್ತೆ ಕಳುಹಿಸಿ",
+        orDivider: "ಅಥವಾ",
+        features: ["ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ", "ಪಾಸ್‌ವರ್ಡ್ ಬೇಡ", "ಲಾಗಿನ್ ಇಲ್ಲದೆ ಮಾಹಿತಿ ನೋಡಿ", "ಮಿಸ್ಡ್ ಕಾಲ್ ಮೂಲಕ ಲಾಗಿನ್"]
+      },
+      ml: {
+        ...hindiText,
+        enterMobilePrompt: "നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക",
+        enterMobileLabel: "മൊബൈൽ നമ്പർ",
+        getOTP: "OTP നേടുക",
+        missedCallLogin: "മിസ്ഡ് കോൾ ലോഗിൻ",
+        exploreWithoutLogin: "ലോഗിൻ ഇല്ലാതെ കാണുക",
+        otpScreenTitle: "OTP നൽകുക",
+        enterOTPPrompt: "നിങ്ങളുടെ OTP നൽകുക",
+        verifyLogin: "സ്ഥിരീകരിച്ച് ലോഗിൻ ചെയ്യുക",
+        resendOTP: "OTP വീണ്ടും അയയ്ക്കുക",
+        orDivider: "അല്ലെങ്കിൽ",
+        features: ["ശബ്ദ മാർഗനിർദേശം", "പാസ്‌വേഡ് വേണ്ട", "ലോഗിൻ ഇല്ലാതെ വിവരം കാണുക", "മിസ്ഡ് കോൾ വഴി ലോഗിൻ"]
+      },
+      mr: {
+        ...hindiText,
+        enterMobilePrompt: "तुमचा मोबाइल नंबर टाका",
+        enterMobileLabel: "मोबाइल नंबर",
+        getOTP: "OTP मिळवा",
+        missedCallLogin: "मिस्ड कॉल लॉगिन",
+        exploreWithoutLogin: "लॉगिन शिवाय पाहा",
+        otpScreenTitle: "OTP टाका",
+        enterOTPPrompt: "तुमचा OTP टाका",
+        verifyLogin: "पडताळा आणि लॉगिन करा",
+        resendOTP: "OTP पुन्हा पाठवा",
+        orDivider: "किंवा",
+        features: ["आवाज मार्गदर्शन", "पासवर्डची गरज नाही", "लॉगिन शिवाय माहिती पाहा", "मिस्ड कॉलने लॉगिन"]
+      },
+      or: {
+        ...hindiText,
+        enterMobilePrompt: "ଆପଣଙ୍କ ମୋବାଇଲ ନମ୍ବର ଦିଅନ୍ତୁ",
+        enterMobileLabel: "ମୋବାଇଲ ନମ୍ବର",
+        getOTP: "OTP ପାଆନ୍ତୁ",
+        missedCallLogin: "ମିସ୍ଡ କଲ୍ ଲଗଇନ୍",
+        exploreWithoutLogin: "ଲଗଇନ୍ ବିନା ଦେଖନ୍ତୁ",
+        otpScreenTitle: "OTP ଦିଅନ୍ତୁ",
+        enterOTPPrompt: "ଆପଣଙ୍କ OTP ଦିଅନ୍ତୁ",
+        verifyLogin: "ଯାଞ୍ଚ କରି ଲଗଇନ୍ କରନ୍ତୁ",
+        resendOTP: "OTP ପୁଣି ପଠାନ୍ତୁ",
+        orDivider: "କିମ୍ବା",
+        features: ["ଧ୍ୱନି ମାର୍ଗଦର୍ଶନ", "ପାସୱାର୍ଡ ଦରକାର ନାହିଁ", "ଲଗଇନ୍ ବିନା ସୂଚନା ଦେଖନ୍ତୁ", "ମିସ୍ଡ କଲ୍ ଦ୍ୱାରା ଲଗଇନ୍"]
+      },
+      pa: {
+        ...hindiText,
+        enterMobilePrompt: "ਆਪਣਾ ਮੋਬਾਈਲ ਨੰਬਰ ਪਾਓ",
+        enterMobileLabel: "ਮੋਬਾਈਲ ਨੰਬਰ",
+        getOTP: "OTP ਲਵੋ",
+        missedCallLogin: "ਮਿਸਡ ਕਾਲ ਲਾਗਇਨ",
+        exploreWithoutLogin: "ਲਾਗਇਨ ਤੋਂ ਬਿਨਾਂ ਵੇਖੋ",
+        otpScreenTitle: "OTP ਪਾਓ",
+        enterOTPPrompt: "ਆਪਣਾ OTP ਪਾਓ",
+        verifyLogin: "ਪੁਸ਼ਟੀ ਕਰੋ ਅਤੇ ਲਾਗਇਨ ਕਰੋ",
+        resendOTP: "OTP ਮੁੜ ਭੇਜੋ",
+        orDivider: "ਜਾਂ",
+        features: ["ਆਵਾਜ਼ ਨਾਲ ਮਦਦ", "ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਨਹੀਂ", "ਲਾਗਇਨ ਤੋਂ ਬਿਨਾਂ ਜਾਣਕਾਰੀ ਵੇਖੋ", "ਮਿਸਡ ਕਾਲ ਨਾਲ ਲਾਗਇਨ"]
+      },
+      ta: {
+        ...hindiText,
+        enterMobilePrompt: "உங்கள் மொபைல் எண்ணை உள்ளிடுங்கள்",
+        enterMobileLabel: "மொபைல் எண்",
+        getOTP: "OTP பெறுங்கள்",
+        missedCallLogin: "மிஸ்டு கால் உள்நுழைவு",
+        exploreWithoutLogin: "உள்நுழையாமல் பார்க்கவும்",
+        otpScreenTitle: "OTP உள்ளிடுங்கள்",
+        enterOTPPrompt: "உங்கள் OTP-ஐ உள்ளிடுங்கள்",
+        verifyLogin: "சரிபார்த்து உள்நுழையவும்",
+        resendOTP: "OTP மீண்டும் அனுப்பவும்",
+        orDivider: "அல்லது",
+        features: ["குரல் வழிகாட்டுதல்", "கடவுச்சொல் தேவையில்லை", "உள்நுழையாமல் தகவல் பார்க்கவும்", "மிஸ்டு கால் மூலம் உள்நுழைவு"]
+      },
+      te: {
+        ...hindiText,
+        enterMobilePrompt: "మీ మొబైల్ నంబర్ నమోదు చేయండి",
+        enterMobileLabel: "మొబైల్ నంబర్",
+        getOTP: "OTP పొందండి",
+        missedCallLogin: "మిస్డ్ కాల్ లాగిన్",
+        exploreWithoutLogin: "లాగిన్ లేకుండా చూడండి",
+        otpScreenTitle: "OTP నమోదు చేయండి",
+        enterOTPPrompt: "మీ OTP నమోదు చేయండి",
+        verifyLogin: "ధృవీకరించి లాగిన్ చేయండి",
+        resendOTP: "OTP మళ్లీ పంపండి",
+        orDivider: "లేదా",
+        features: ["వాయిస్ మార్గదర్శనం", "పాస్‌వర్డ్ అవసరం లేదు", "లాగిన్ లేకుండా సమాచారం చూడండి", "మిస్డ్ కాల్ ద్వారా లాగిన్"]
+      },
+      ur: {
+        ...hindiText,
+        enterMobilePrompt: "اپنا موبائل نمبر درج کریں",
+        enterMobileLabel: "موبائل نمبر",
+        getOTP: "OTP حاصل کریں",
+        missedCallLogin: "مسڈ کال لاگ اِن",
+        exploreWithoutLogin: "لاگ اِن کے بغیر دیکھیں",
+        otpScreenTitle: "OTP درج کریں",
+        enterOTPPrompt: "اپنا OTP درج کریں",
+        verifyLogin: "تصدیق کریں اور لاگ اِن کریں",
+        resendOTP: "OTP دوبارہ بھیجیں",
+        orDivider: "یا",
+        features: ["آواز کی رہنمائی", "پاس ورڈ کی ضرورت نہیں", "لاگ اِن کے بغیر معلومات دیکھیں", "مسڈ کال سے لاگ اِن"]
+      }
+    };
+
+    const translations = Object.fromEntries(languages.map((language) => [
+      language.key,
+      {
+        ...hindiText,
+        ...(localizedText[language.key] || {}),
+        languageConfirm: languageConfirmText[language.key] || `Continuing in ${language.english}`
+      }
+    ]));
+
+    const welcomeCopy = {
+      as: {
+        welcomeTitle: "YojanMitra লৈ স্বাগতম",
+        welcomeMessage: "আপুনি এই মোবাইল নম্বৰৰ সৈতে লগইন কৰিছে। আহক, আপোনাৰ বাবে সঠিক আঁচনি বিচাৰোঁ।",
+        welcomeVoice: "YojanMitra লৈ স্বাগতম। আহক, আপোনাৰ বাবে সঠিক আঁচনি বিচাৰোঁ।",
+        getStarted: "আৰম্ভ কৰক",
+        loginVerified: "লগইন পৰীক্ষিত হৈছে"
+      },
+      bn: {
+        welcomeTitle: "YojanMitra-এ আপনাকে স্বাগতম",
+        welcomeMessage: "আপনি এই মোবাইল নম্বর দিয়ে লগইন করেছেন। চলুন, আপনার জন্য সঠিক প্রকল্প খুঁজি।",
+        welcomeVoice: "YojanMitra-এ আপনাকে স্বাগতম। চলুন, আপনার জন্য সঠিক প্রকল্প খুঁজি।",
+        getStarted: "শুরু করুন",
+        loginVerified: "লগইন যাচাই হয়েছে"
+      },
+      gu: {
+        welcomeTitle: "YojanMitra માં આપનું સ્વાગત છે",
+        welcomeMessage: "તમે આ મોબાઇલ નંબરથી લોગિન થયા છો. ચાલો, તમારા માટે યોગ્ય યોજનાઓ શોધીએ.",
+        welcomeVoice: "YojanMitra માં આપનું સ્વાગત છે. ચાલો, તમારા માટે યોગ્ય યોજનાઓ શોધીએ.",
+        getStarted: "શરૂ કરો",
+        loginVerified: "લોગિન ચકાસાઈ ગયું"
+      },
+      kn: {
+        welcomeTitle: "YojanMitra ಗೆ ಸ್ವಾಗತ",
+        welcomeMessage: "ನೀವು ಈ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಲಾಗಿನ್ ಆಗಿದ್ದೀರಿ. ನಿಮಗೆ ಸರಿಯಾದ ಯೋಜನೆಗಳನ್ನು ಹುಡುಕೋಣ.",
+        welcomeVoice: "YojanMitra ಗೆ ಸ್ವಾಗತ. ನಿಮಗೆ ಸರಿಯಾದ ಯೋಜನೆಗಳನ್ನು ಹುಡುಕೋಣ.",
+        getStarted: "ಪ್ರಾರಂಭಿಸಿ",
+        loginVerified: "ಲಾಗಿನ್ ಪರಿಶೀಲಿಸಲಾಗಿದೆ"
+      },
+      ml: {
+        welcomeTitle: "YojanMitra-യിലേക്ക് സ്വാഗതം",
+        welcomeMessage: "ഈ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് നിങ്ങൾ ലോഗിൻ ചെയ്തിരിക്കുന്നു. നിങ്ങൾക്ക് അനുയോജ്യമായ പദ്ധതികൾ കണ്ടെത്താം.",
+        welcomeVoice: "YojanMitra-യിലേക്ക് സ്വാഗതം. നിങ്ങൾക്ക് അനുയോജ്യമായ പദ്ധതികൾ കണ്ടെത്താം.",
+        getStarted: "ആരംഭിക്കുക",
+        loginVerified: "ലോഗിൻ സ്ഥിരീകരിച്ചു"
+      },
+      mr: {
+        welcomeTitle: "YojanMitra मध्ये आपले स्वागत आहे",
+        welcomeMessage: "तुम्ही या मोबाइल नंबरने लॉगिन केले आहे. चला, तुमच्यासाठी योग्य योजना शोधूया.",
+        welcomeVoice: "YojanMitra मध्ये आपले स्वागत आहे. चला, तुमच्यासाठी योग्य योजना शोधूया.",
+        getStarted: "सुरू करा",
+        loginVerified: "लॉगिन सत्यापित झाले"
+      },
+      or: {
+        welcomeTitle: "YojanMitra କୁ ସ୍ୱାଗତ",
+        welcomeMessage: "ଆପଣ ଏହି ମୋବାଇଲ ନମ୍ବରରେ ଲଗଇନ୍ କରିଛନ୍ତି। ଆସନ୍ତୁ, ଆପଣଙ୍କ ପାଇଁ ଠିକ୍ ଯୋଜନା ଖୋଜିବା।",
+        welcomeVoice: "YojanMitra କୁ ସ୍ୱାଗତ। ଆସନ୍ତୁ, ଆପଣଙ୍କ ପାଇଁ ଠିକ୍ ଯୋଜନା ଖୋଜିବା।",
+        getStarted: "ଆରମ୍ଭ କରନ୍ତୁ",
+        loginVerified: "ଲଗଇନ୍ ଯାଞ୍ଚ ହୋଇଛି"
+      },
+      pa: {
+        welcomeTitle: "YojanMitra ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ",
+        welcomeMessage: "ਤੁਸੀਂ ਇਸ ਮੋਬਾਈਲ ਨੰਬਰ ਨਾਲ ਲਾਗਇਨ ਹੋ ਗਏ ਹੋ। ਆਓ, ਤੁਹਾਡੇ ਲਈ ਸਹੀ ਯੋਜਨਾਵਾਂ ਲੱਭੀਏ।",
+        welcomeVoice: "YojanMitra ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ। ਆਓ, ਤੁਹਾਡੇ ਲਈ ਸਹੀ ਯੋਜਨਾਵਾਂ ਲੱਭੀਏ।",
+        getStarted: "ਸ਼ੁਰੂ ਕਰੋ",
+        loginVerified: "ਲਾਗਇਨ ਪੁਸ਼ਟੀ ਹੋ ਗਈ"
+      },
+      ta: {
+        welcomeTitle: "YojanMitra-க்கு வரவேற்கிறோம்",
+        welcomeMessage: "இந்த மொபைல் எண்ணால் நீங்கள் உள்நுழைந்துள்ளீர்கள். உங்களுக்கு சரியான திட்டங்களை கண்டுபிடிப்போம்.",
+        welcomeVoice: "YojanMitra-க்கு வரவேற்கிறோம். உங்களுக்கு சரியான திட்டங்களை கண்டுபிடிப்போம்.",
+        getStarted: "தொடங்குங்கள்",
+        loginVerified: "உள்நுழைவு சரிபார்க்கப்பட்டது"
+      },
+      te: {
+        welcomeTitle: "YojanMitra కు స్వాగతం",
+        welcomeMessage: "మీరు ఈ మొబైల్ నంబర్‌తో లాగిన్ అయ్యారు. మీకు సరైన పథకాలను కనుగొందాం.",
+        welcomeVoice: "YojanMitra కు స్వాగతం. మీకు సరైన పథకాలను కనుగొందాం.",
+        getStarted: "ప్రారంభించండి",
+        loginVerified: "లాగిన్ ధృవీకరించబడింది"
+      },
+      ur: {
+        welcomeTitle: "YojanMitra میں خوش آمدید",
+        welcomeMessage: "آپ اس موبائل نمبر سے لاگ اِن ہو گئے ہیں۔ آئیے، آپ کے لیے صحیح اسکیمیں تلاش کرتے ہیں۔",
+        welcomeVoice: "YojanMitra میں خوش آمدید۔ آئیے، آپ کے لیے صحیح اسکیمیں تلاش کرتے ہیں۔",
+        getStarted: "شروع کریں",
+        loginVerified: "لاگ اِن تصدیق ہو گیا"
+      }
+    };
+
+    Object.entries(welcomeCopy).forEach(([key, copy]) => {
+      translations[key] = {
+        ...translations[key],
+        ...copy
+      };
+    });
+
+    const extraWelcomeCopy = {
+      brx: {
+        welcomeTitle: "YojanMitra आव बरायबाय",
+        welcomeMessage: "नोंथाङा बे मोबाइल नम्बरजों लगइन जाबाय। फै, नोंथाङनि थाखाय गेबें योजना नागिरनि।",
+        welcomeVoice: "YojanMitra आव बरायबाय। फै, नोंथाङनि थाखाय गेबें योजना नागिरनि।",
+        getStarted: "जागाय",
+        loginVerified: "लगइन थारखांनाय जाबाय"
+      },
+      doi: {
+        welcomeTitle: "YojanMitra च तुंदा स्वागत ऐ",
+        welcomeMessage: "तुस इस मोबाइल नंबर कन्नै लॉगिन होई गे ओ। आओ, तुंदे लेई सही योजनाएं लब्भचै।",
+        welcomeVoice: "YojanMitra च तुंदा स्वागत ऐ। आओ, तुंदे लेई सही योजनाएं लब्भचै।",
+        getStarted: "शुरू करो",
+        loginVerified: "लॉगिन सत्यापित होई गेआ"
+      },
+      ks: {
+        welcomeTitle: "YojanMitra منز خوش آمدید",
+        welcomeMessage: "تُہۍ چھُو یِم موبائل نمبر سٲتھ لاگ اِن گژھمُت۔ ؤنۍ تُہندِ خٲطر صحیح سکیمہ لَبان۔",
+        welcomeVoice: "YojanMitra منز خوش آمدید۔ ؤنۍ تُہندِ خٲطر صحیح سکیمہ لَبان۔",
+        getStarted: "شروع کرو",
+        loginVerified: "لاگ اِن تصدیق گژھ"
+      },
+      kok: {
+        welcomeTitle: "YojanMitra-ंत तुमचें येवकार",
+        welcomeMessage: "तुमी ह्या मोबायल नंबरान लॉगिन जाल्यात. येया, तुमचेर योग्य येवजण सोदूंया.",
+        welcomeVoice: "YojanMitra-ंत तुमचें येवकार. येया, तुमचेर योग्य येवजण सोदूंया.",
+        getStarted: "सुरू करात",
+        loginVerified: "लॉगिन तपासलें"
+      },
+      mai: {
+        welcomeTitle: "YojanMitra में अहां के स्वागत अछि",
+        welcomeMessage: "अहां एहि मोबाइल नंबर सँ लॉगिन भऽ गेल छी। आउ, अहां लेल सही योजना खोजी।",
+        welcomeVoice: "YojanMitra में अहां के स्वागत अछि। आउ, अहां लेल सही योजना खोजी।",
+        getStarted: "शुरू करू",
+        loginVerified: "लॉगिन सत्यापित भेल"
+      },
+      mni: {
+        welcomeTitle: "YojanMitra ꯗ ꯇꯔꯥꯝꯅ ꯑꯣꯛꯆꯔꯤ",
+        welcomeMessage: "ꯅꯍꯥꯛ ꯃꯣꯕꯥꯏꯜ ꯅꯝꯕꯔ ꯑꯁꯤꯗ ꯂꯣꯒꯏꯟ ꯇꯧꯈ꯭ꯔꯦ। ꯅꯍꯥꯛꯀꯤ ꯆꯨꯝꯕ ꯁ꯭ꯀꯤꯝ ꯊꯤꯔꯁꯤ।",
+        welcomeVoice: "YojanMitra ꯗ ꯇꯔꯥꯝꯅ ꯑꯣꯛꯆꯔꯤ। ꯅꯍꯥꯛꯀꯤ ꯆꯨꯝꯕ ꯁ꯭ꯀꯤꯝ ꯊꯤꯔꯁꯤ।",
+        getStarted: "ꯍꯧꯔꯁꯤ",
+        loginVerified: "ꯂꯣꯒꯏꯟ ꯚꯦꯔꯤꯐꯥꯏ ꯇꯧꯔꯦ"
+      },
+      ne: {
+        welcomeTitle: "YojanMitra मा स्वागत छ",
+        welcomeMessage: "तपाईं यो मोबाइल नम्बरबाट लगइन हुनुभएको छ। आउनुहोस्, तपाईंका लागि सही योजनाहरू खोजौं।",
+        welcomeVoice: "YojanMitra मा स्वागत छ। आउनुहोस्, तपाईंका लागि सही योजनाहरू खोजौं।",
+        getStarted: "सुरु गर्नुहोस्",
+        loginVerified: "लगइन प्रमाणित भयो"
+      },
+      sa: {
+        welcomeTitle: "YojanMitra मध्ये स्वागतम्",
+        welcomeMessage: "भवान्/भवती अनेन चलदूरभाषसङ्ख्यया प्रविष्टः। आगच्छतु, भवतः/भवत्याः योग्याः योजनाः अन्वेषयामः।",
+        welcomeVoice: "YojanMitra मध्ये स्वागतम्। आगच्छतु, भवतः योग्याः योजनाः अन्वेषयामः।",
+        getStarted: "आरभ्यताम्",
+        loginVerified: "प्रवेशः सत्यापितः"
+      },
+      sat: {
+        welcomeTitle: "YojanMitra ᱨᱮ ᱥᱟᱹᱜᱩᱱ",
+        welcomeMessage: "ᱟᱢ ᱱᱚᱣᱟ ᱢᱚᱵᱟᱭᱤᱞ ᱱᱚᱢᱵᱚᱨ ᱛᱮ ᱞᱚᱜᱤᱱ ᱟᱠᱟᱫᱟ। ᱫᱚᱞᱟ, ᱟᱢ ᱞᱟᱹᱜᱤᱫ ᱴᱷᱤᱠ ᱥᱠᱤᱢ ᱯᱟᱱᱛᱮᱭᱟ।",
+        welcomeVoice: "YojanMitra ᱨᱮ ᱥᱟᱹᱜᱩᱱ। ᱫᱚᱞᱟ, ᱟᱢ ᱞᱟᱹᱜᱤᱫ ᱴᱷᱤᱠ ᱥᱠᱤᱢ ᱯᱟᱱᱛᱮᱭᱟ।",
+        getStarted: "ᱮᱦᱚᱵ",
+        loginVerified: "ᱞᱚᱜᱤᱱ ᱧᱮᱞ ᱥᱟᱹᱨᱤ"
+      },
+      sd: {
+        welcomeTitle: "YojanMitra ۾ ڀليڪار",
+        welcomeMessage: "توهان هن موبائل نمبر سان لاگ اِن ٿي ويا آهيو. اچو، توهان لاءِ صحيح اسڪيمون ڳوليون.",
+        welcomeVoice: "YojanMitra ۾ ڀليڪار. اچو، توهان لاءِ صحيح اسڪيمون ڳوليون.",
+        getStarted: "شروع ڪريو",
+        loginVerified: "لاگ اِن تصديق ٿي وئي"
+      }
+    };
+
+    Object.entries(extraWelcomeCopy).forEach(([key, copy]) => {
+      translations[key] = {
+        ...translations[key],
+        ...copy
+      };
+    });
+
+    const screens = {
+      language: document.getElementById("languageScreen"),
+      login: document.getElementById("loginScreen"),
+      otp: document.getElementById("otpScreen"),
+      welcome: document.getElementById("welcomeScreen")
+    };
+
+    const state = {
+      language: localStorage.getItem("appLanguage") || null,
+      phone: ""
+    };
+
+    const toast = document.getElementById("toast");
+    const languageGrid = document.getElementById("languageGrid");
+    const phoneInput = document.getElementById("phoneInput");
+    const voiceChip = document.getElementById("voiceChip");
+    const otpInputs = Array.from(document.querySelectorAll(".otp-input"));
+    let toastTimer;
+
+    function getLanguage(key = state.language) {
+      return languages.find((language) => language.key === key) || languages[0];
+    }
+
+    function t(key) {
+      const activeTranslations = translations[state.language] || translations.hi;
+      return activeTranslations[key];
+    }
+
+    function bilingual(key) {
+      const native = t(key);
+      const english = englishText[key];
+      if (state.language === "en" || native === english) {
+        return `<span>${english}</span>`;
+      }
+      return `<span>${english}</span><span class="native-line">${native}</span>`;
+    }
+
+    function showToast(message) {
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    async function postJson(url, data) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      const contentType = response.headers.get("content-type") || "";
+
+      if (!contentType.includes("application/json")) {
+        throw new Error("Server API is not responding. Please restart the backend server.");
+      }
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Request failed");
+      }
+
+      return result;
+    }
+
+    function speak(text, langCode, options = {}) {
+      if (!("speechSynthesis" in window)) {
+        showToast("Voice not supported on this browser");
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = langCode;
+      utterance.rate = options.rate || 0.92;
+      utterance.pitch = 1;
+      utterance.onstart = () => voiceChip.classList.add("speaking");
+      utterance.onend = () => voiceChip.classList.remove("speaking");
+      utterance.onerror = () => voiceChip.classList.remove("speaking");
+
+      if (options.cancel !== false) {
+        window.speechSynthesis.cancel();
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakSequence(items) {
+      if (!("speechSynthesis" in window)) {
+        showToast("Voice not supported on this browser");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      items.forEach((item) => {
+        const utterance = new SpeechSynthesisUtterance(item.text);
+        utterance.lang = item.lang;
+        utterance.rate = 0.92;
+        utterance.onstart = () => voiceChip.classList.add("speaking");
+        utterance.onend = () => voiceChip.classList.remove("speaking");
+        utterance.onerror = () => voiceChip.classList.remove("speaking");
+        window.speechSynthesis.speak(utterance);
+      });
+    }
+
+    function showScreen(name) {
+      Object.values(screens).forEach((screen) => screen.classList.remove("active"));
+      screens[name].classList.add("active");
+
+      if (name === "login") {
+        renderLogin();
+        setTimeout(() => phoneInput.focus(), 330);
+        setTimeout(() => speak(`${t("enterMobilePrompt")}. ${englishText.enterMobilePrompt}.`, getLanguage().lang), 360);
+      }
+
+      if (name === "otp") {
+        renderOtp();
+        setTimeout(() => otpInputs[0].focus(), 330);
+        setTimeout(() => speak(`${t("enterOTPPrompt")}. ${englishText.enterOTPPrompt}.`, getLanguage().lang), 360);
+      }
+
+      if (name === "welcome") {
+        renderWelcome();
+        setTimeout(() => speak(`${t("welcomeVoice")} ${englishText.welcomeVoice}`, getLanguage().lang), 360);
+      }
+    }
+
+    function renderLanguages() {
+      languageGrid.innerHTML = languages.map((language) => `
+        <button class="language-card" type="button" data-language="${language.key}" aria-label="Choose ${language.english}">
+          <span>
+            <span class="native-name">${language.native}</span>
+            <span class="english-name">${language.english}</span>
+          </span>
+          <span class="speaker-btn" role="button" tabindex="-1" data-speak="${language.key}" aria-label="Hear ${language.english}">🔊</span>
+        </button>
+      `).join("");
+    }
+
+    function renderLogin() {
+      const features = t("features");
+      document.getElementById("tagline").innerHTML = bilingual("appTagline");
+      document.getElementById("otpTagline").innerHTML = bilingual("appTagline");
+      document.getElementById("voiceChipText").textContent = state.language === "en"
+        ? englishText.enterMobilePrompt
+        : `${t("enterMobilePrompt")} / ${englishText.enterMobilePrompt}`;
+      document.getElementById("phoneLabel").innerHTML = bilingual("enterMobileLabel");
+      document.getElementById("getOtpButton").innerHTML = bilingual("getOTP");
+      document.getElementById("dividerText").innerHTML = state.language === "en"
+        ? englishText.orDivider
+        : `${t("orDivider")} / ${englishText.orDivider}`;
+      document.getElementById("missedCallButton").innerHTML = bilingual("missedCallLogin");
+      document.getElementById("exploreStrip").innerHTML = bilingual("exploreWithoutLogin");
+      document.getElementById("featureList").innerHTML = englishText.features.map((feature, index) => `
+        <li class="feature-item">
+          <span class="feature-icon" aria-hidden="true">${["🎙️", "🔑", "🌱", "📞"][index]}</span>
+          <span class="feature-text">
+            <span>${feature}</span>
+            ${state.language === "en" ? "" : `<span class="native-line">${features[index]}</span>`}
+          </span>
+        </li>
+      `).join("");
+    }
+
+    function renderOtp() {
+      document.getElementById("otpTitle").innerHTML = bilingual("otpScreenTitle");
+      document.getElementById("verifyButton").innerHTML = bilingual("verifyLogin");
+      document.getElementById("resendButton").innerHTML = state.language === "en"
+        ? englishText.resendOTP
+        : `${t("resendOTP")} / ${englishText.resendOTP}`;
+      const masked = state.phone
+        ? `+91 ${state.phone.slice(0, 2)}XXXXXX${state.phone.slice(-2)}`
+        : "+91 XXXXXXXXXX";
+      document.getElementById("otpSubtext").textContent = `OTP sent to ${masked}`;
+      if (state.demoOtp) {
+        document.getElementById("otpSubtext").textContent = `Demo OTP for ${masked}: ${state.demoOtp}`;
+      }
+      otpInputs.forEach((input) => {
+        input.value = "";
+        input.classList.remove("filled");
+      });
+    }
+
+    function getMaskedPhone() {
+      return state.phone
+        ? `+91 ${state.phone.slice(0, 2)}XXXXXX${state.phone.slice(-2)}`
+        : "+91 XXXXXXXXXX";
+    }
+
+    function renderWelcome() {
+      document.getElementById("welcomeTagline").innerHTML = bilingual("appTagline");
+      document.getElementById("welcomeTitle").innerHTML = bilingual("welcomeTitle");
+      document.getElementById("welcomePhone").textContent = getMaskedPhone();
+      document.getElementById("welcomeMessage").innerHTML = bilingual("welcomeMessage");
+      document.getElementById("getStartedButton").innerHTML = bilingual("getStarted");
+      document.getElementById("welcomeVerifiedText").textContent = t("loginVerified");
+    }
+
+    function selectLanguage(key) {
+      state.language = key;
+      localStorage.setItem("appLanguage", key);
+      speak(t("languageConfirm"), getLanguage().lang);
+      setTimeout(() => showScreen("login"), 650);
+    }
+
+    async function requestOtp() {
+      const digits = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+      phoneInput.value = digits;
+      if (digits.length !== 10) {
+        showToast("Please enter a valid 10 digit mobile number");
+        phoneInput.focus();
+        return false;
+      }
+
+      state.phone = digits;
+      const result = await postJson("/api/otp/request", {
+        phone: digits,
+        language: state.language
+      });
+
+      if (result.demoOtp) {
+        state.demoOtp = result.demoOtp;
+        showToast(`Demo OTP: ${result.demoOtp}`);
+      }
+
+      return true;
+    }
+
+    async function submitPhone() {
+      try {
+        const otpRequested = await requestOtp();
+        if (!otpRequested) {
+          return;
+        }
+      } catch (error) {
+        showToast(error.message || "Could not send OTP");
+        return;
+      }
+
+      showScreen("otp");
+    }
+
+    async function verifyOtp(auto = false) {
+      const otp = otpInputs.map((input) => input.value).join("");
+      if (otp.length < 4) {
+        showToast("Please enter all 4 OTP digits");
+        return;
+      }
+
+      try {
+        const result = await postJson("/api/otp/verify", {
+          phone: state.phone,
+          otp
+        });
+        showToast(result.message || (auto ? "OTP auto-submitted" : "Login verified"));
+        showScreen("welcome");
+      } catch (error) {
+        showToast(error.message || "OTP verification failed");
+      }
+    }
+
+    renderLanguages();
+
+    languageGrid.addEventListener("click", (event) => {
+      const speaker = event.target.closest("[data-speak]");
+      if (speaker) {
+        event.stopPropagation();
+        const language = getLanguage(speaker.dataset.speak);
+        speak(language.native, language.lang);
+        return;
+      }
+
+      const card = event.target.closest("[data-language]");
+      if (card) {
+        selectLanguage(card.dataset.language);
+      }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      submitPhone();
+    });
+
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+    });
+
+    voiceChip.addEventListener("click", () => {
+      speak(`${t("enterMobilePrompt")}. ${englishText.enterMobilePrompt}.`, getLanguage().lang);
+    });
+
+    document.getElementById("missedCallButton").addEventListener("click", async () => {
+      const digits = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+      phoneInput.value = digits;
+      if (digits.length !== 10) {
+        showToast("Please enter a valid 10 digit mobile number");
+        phoneInput.focus();
+        return;
+      }
+
+      try {
+        const result = await postJson("/api/missed-call-login", {
+          phone: digits,
+          language: state.language
+        });
+        showToast(`${result.message}. Call ${result.callbackNumber}`);
+      } catch (error) {
+        showToast(error.message || "Missed call login failed");
+      }
+    });
+
+    document.getElementById("exploreStrip").addEventListener("click", (event) => {
+      event.preventDefault();
+      alert(`${englishText.exploreWithoutLogin}${state.language === "en" ? "" : " / " + t("exploreWithoutLogin")}`);
+    });
+
+    document.getElementById("backButton").addEventListener("click", () => showScreen("login"));
+
+    document.getElementById("verifyButton").addEventListener("click", () => verifyOtp(false));
+
+    document.getElementById("resendButton").addEventListener("click", async () => {
+      try {
+        const result = await postJson("/api/otp/request", {
+          phone: state.phone,
+          language: state.language
+        });
+        if (result.demoOtp) {
+          state.demoOtp = result.demoOtp;
+          document.getElementById("otpSubtext").textContent = `Demo OTP for ${getMaskedPhone()}: ${result.demoOtp}`;
+          showToast(`Demo OTP: ${result.demoOtp}`);
+        } else {
+          showToast("OTP resent");
+        }
+        speak(`${t("enterOTPPrompt")}. ${englishText.enterOTPPrompt}.`, getLanguage().lang);
+      } catch (error) {
+        showToast(error.message || "Could not resend OTP");
+      }
+    });
+
+    document.getElementById("getStartedButton").addEventListener("click", () => {
+      window.location.href = "/category.html";
+    });
+
+    otpInputs.forEach((input, index) => {
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(0, 1);
+        input.classList.toggle("filled", Boolean(input.value));
+        if (input.value && otpInputs[index + 1]) {
+          otpInputs[index + 1].focus();
+        }
+        if (otpInputs.every((box) => box.value)) {
+          verifyOtp(true);
+        }
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Backspace" && !input.value && otpInputs[index - 1]) {
+          otpInputs[index - 1].focus();
+        }
+      });
+
+      input.addEventListener("paste", (event) => {
+        event.preventDefault();
+        const pasted = (event.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "").slice(0, 4);
+        pasted.split("").forEach((digit, digitIndex) => {
+          if (otpInputs[digitIndex]) {
+            otpInputs[digitIndex].value = digit;
+            otpInputs[digitIndex].classList.add("filled");
+          }
+        });
+        const nextEmpty = otpInputs.find((box) => !box.value);
+        (nextEmpty || otpInputs[3]).focus();
+        if (otpInputs.every((box) => box.value)) {
+          verifyOtp(true);
+        }
+      });
+    });
+
+    window.addEventListener("load", () => {
+      speakSequence([
+        { text: "Namaste! Aap kaun si bhasha mein baat karna chahte hain?", lang: "hi-IN" },
+        { text: "Hello! Which language are you comfortable with?", lang: "en-IN" }
+      ]);
+    });
+  </script>
+</body>
+</html>

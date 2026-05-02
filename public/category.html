@@ -1,0 +1,68 @@
+<!-- File: public/category.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Category | YojanMitra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/category.css">
+</head>
+<body>
+  <main class="category-page">
+    <aside class="brand-panel">
+      <div class="brand-lockup">
+        <div class="brand-logo">
+          <img src="/logo.jpeg" alt="YojanMitra logo">
+        </div>
+        <div>
+          <h1>YojanMitra</h1>
+          <p>हर योजना, आपके साथ</p>
+        </div>
+      </div>
+
+      <ul class="feature-list" aria-label="YojanMitra features">
+        <li><span>🎙️</span><strong>Voice guided</strong><small id="featureVoiceNative">Voice assistance</small></li>
+        <li><span>🔑</span><strong>No password needed</strong><small id="featurePasswordNative">No password needed</small></li>
+        <li><span>🌱</span><strong>Explore without login</strong><small id="featureExploreNative">View without login information</small></li>
+        <li><span>📞</span><strong>Missed call login</strong><small id="featureMissedNative">Login by missed call</small></li>
+      </ul>
+    </aside>
+
+    <section class="content-panel">
+      <div class="category-card-shell">
+        <button class="back-link" type="button" id="backButton">← Back</button>
+
+        <button class="voice-banner" type="button" id="voiceButton">
+          <span aria-hidden="true">🤖</span>
+          <span>
+            <span>Who are you? Tap your category</span>
+            <span class="native-line" id="voiceNativeText">आप कौन हैं?</span>
+          </span>
+          <span aria-hidden="true" class="voice-bars">▂▅▇▅▂</span>
+        </button>
+
+        <header class="section-heading">
+          <h2>
+            <span>Choose your category</span>
+            <span class="native-line" id="headingNativeText">आप कौन हैं?</span>
+          </h2>
+          <p>Select your category to see relevant schemes</p>
+        </header>
+
+        <section class="categories-grid" id="categoriesGrid" aria-live="polite"></section>
+
+        <button class="next-button" type="button" id="nextButton" disabled>
+          <span>Next</span>
+          <span class="native-line" id="nextNativeText">आगे बढ़ें</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/category.js?v=5"></script>
+</body>
+</html>
