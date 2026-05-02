@@ -1,0 +1,246 @@
+.orbit-particles {
+  --orbit-size: clamp(118px, 10vw, 148px);
+  --orbit-radius: 1px;
+  position: absolute;
+  left: 50%;
+  top: clamp(132px, 24vh, 190px);
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.orbit-particles__glow {
+  position: absolute;
+  inset: 14%;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(0, 255, 136, 0.24), transparent 60%),
+    radial-gradient(circle at 68% 38%, rgba(255, 107, 0, 0.2), transparent 54%),
+    radial-gradient(circle at 36% 70%, rgba(0, 212, 255, 0.16), transparent 56%);
+  filter: blur(16px);
+  animation: orbitGlowPulse 3.6s ease-in-out infinite;
+}
+
+.orbit-particles__ring {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+  animation: clusterBreathe 7.5s ease-in-out infinite;
+}
+
+.orbit-particles__ring::before,
+.orbit-particles__ring::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-particles__ring::before {
+  width: 68px;
+  height: 48px;
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.08);
+  animation: clusterHalo 8.5s ease-in-out infinite;
+}
+
+.orbit-particles__ring::after {
+  width: 18px;
+  height: 18px;
+  background:
+    radial-gradient(circle, rgba(255, 255, 225, 0.86), transparent 32%),
+    radial-gradient(circle, rgba(0, 255, 136, 0.22), transparent 68%);
+  filter: blur(0.2px);
+  opacity: 0.62;
+  animation: clusterCore 4.2s ease-in-out infinite;
+}
+
+.orbit-particles__dot {
+  --x: 0px;
+  --y: 0px;
+  --dx: 0px;
+  --dy: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(4px, 0.45vw, 6px);
+  height: clamp(4px, 0.45vw, 6px);
+  border-radius: 999px;
+  transform: translate(-50%, -50%) translate(var(--x), var(--y));
+  animation: clusterSpark 3.6s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.orbit-particles__dot:nth-child(1) { --x: -44px; --y: -3px; --dx: 5px; --dy: -4px; }
+.orbit-particles__dot:nth-child(2) { --x: -34px; --y: -18px; --dx: 3px; --dy: 5px; }
+.orbit-particles__dot:nth-child(3) { --x: -19px; --y: -29px; --dx: -4px; --dy: 4px; }
+.orbit-particles__dot:nth-child(4) { --x: -4px; --y: -34px; --dx: 4px; --dy: 3px; }
+.orbit-particles__dot:nth-child(5) { --x: 13px; --y: -27px; --dx: -3px; --dy: -5px; }
+.orbit-particles__dot:nth-child(6) { --x: 30px; --y: -16px; --dx: -5px; --dy: 4px; }
+.orbit-particles__dot:nth-child(7) { --x: 42px; --y: -1px; --dx: 4px; --dy: 5px; }
+.orbit-particles__dot:nth-child(8) { --x: 30px; --y: 14px; --dx: -4px; --dy: -4px; }
+.orbit-particles__dot:nth-child(9) { --x: 15px; --y: 25px; --dx: 5px; --dy: -3px; }
+.orbit-particles__dot:nth-child(10) { --x: 0px; --y: 31px; --dx: -3px; --dy: 4px; }
+.orbit-particles__dot:nth-child(11) { --x: -16px; --y: 23px; --dx: 4px; --dy: -5px; }
+.orbit-particles__dot:nth-child(12) { --x: -31px; --y: 12px; --dx: -5px; --dy: -3px; }
+.orbit-particles__dot:nth-child(13) { --x: -52px; --y: 14px; --dx: 6px; --dy: 3px; opacity: 0.58; }
+.orbit-particles__dot:nth-child(14) { --x: -49px; --y: -22px; --dx: 5px; --dy: -5px; opacity: 0.48; }
+.orbit-particles__dot:nth-child(15) { --x: 52px; --y: -19px; --dx: -5px; --dy: 5px; opacity: 0.54; }
+.orbit-particles__dot:nth-child(16) { --x: 56px; --y: 18px; --dx: -6px; --dy: -4px; opacity: 0.5; }
+.orbit-particles__dot:nth-child(17) { --x: -8px; --y: -45px; --dx: -4px; --dy: 6px; opacity: 0.66; }
+.orbit-particles__dot:nth-child(18) { --x: 8px; --y: 44px; --dx: 4px; --dy: -6px; opacity: 0.58; }
+.orbit-particles__dot:nth-child(19) { --x: 1px; --y: 0px; --dx: 2px; --dy: -2px; width: 8px; height: 8px; }
+.orbit-particles__dot:nth-child(20) { --x: 22px; --y: 3px; --dx: -4px; --dy: 3px; opacity: 0.72; }
+
+.orbit-particles__dot.is-green {
+  background: #00ff88;
+  box-shadow:
+    0 0 10px rgba(0, 255, 136, 0.95),
+    0 0 24px rgba(0, 255, 136, 0.45);
+}
+
+.orbit-particles__dot.is-orange {
+  background: #ff8a00;
+  box-shadow:
+    0 0 10px rgba(255, 107, 0, 0.95),
+    0 0 24px rgba(255, 184, 0, 0.42);
+}
+
+.orbit-particles__dot.is-cyan {
+  background: #00d4ff;
+  box-shadow:
+    0 0 10px rgba(0, 212, 255, 0.95),
+    0 0 22px rgba(0, 212, 255, 0.42);
+}
+
+@keyframes orbitRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitFlicker {
+  0%,
+  100% {
+    opacity: 0.48;
+    scale: 0.78;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.18;
+  }
+}
+
+@keyframes orbitGlowPulse {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.82;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes clusterBreathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg) scale(calc(var(--cluster-scale, 1) * 0.98));
+  }
+  45% {
+    transform: translateY(-5px) rotate(4deg) scale(calc(var(--cluster-scale, 1) * 1.04));
+  }
+  70% {
+    transform: translateY(-2px) rotate(1deg) scale(calc(var(--cluster-scale, 1) * 1.01));
+  }
+}
+
+@keyframes clusterSpark {
+  0%,
+  100% {
+    opacity: 0.5;
+    filter: blur(0);
+    transform: translate(-50%, -50%) translate(var(--x), var(--y));
+  }
+  42% {
+    opacity: 1;
+    filter: blur(0.15px);
+    transform:
+      translate(-50%, -50%)
+      translate(calc(var(--x) + var(--dx)), calc(var(--y) + var(--dy)))
+      scale(1.18);
+  }
+  68% {
+    opacity: 0.72;
+    filter: blur(0.4px);
+    transform:
+      translate(-50%, -50%)
+      translate(var(--x), var(--y))
+      scale(0.9);
+  }
+}
+
+@keyframes clusterHalo {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: translate(-50%, -50%) rotate(-10deg) scale(0.94);
+  }
+  50% {
+    opacity: 0.58;
+    transform: translate(-50%, -50%) rotate(12deg) scale(1.08);
+  }
+}
+
+@keyframes clusterCore {
+  0%,
+  100% {
+    opacity: 0.38;
+    transform: translate(-50%, -50%) scale(0.72);
+  }
+  50% {
+    opacity: 0.78;
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+
+@media (max-width: 768px) {
+  .orbit-particles {
+    --orbit-size: 104px;
+    --cluster-scale: 0.82;
+    top: 132px;
+  }
+
+  .orbit-particles__ring::before {
+    width: 58px;
+    height: 40px;
+  }
+
+  .orbit-particles__ring::after {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .orbit-particles {
+    --orbit-size: 96px;
+    --cluster-scale: 0.72;
+    top: 124px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-particles__ring,
+  .orbit-particles__dot,
+  .orbit-particles__glow {
+    animation-duration: 0.001ms;
+    animation-iteration-count: 1;
+  }
+}

@@ -57,6 +57,21 @@ const categoryTitles = {
   business: "Business",
 };
 
+function isUserLoggedIn() {
+  if (localStorage.getItem("yojanMitraLoggedIn") === "true") {
+    return true;
+  }
+
+  return ["loggedInUser", "currentUser", "user"].some((key) => {
+    try {
+      const value = localStorage.getItem(key);
+      return Boolean(value && JSON.parse(value));
+    } catch (error) {
+      return Boolean(localStorage.getItem(key));
+    }
+  });
+}
+
 export default function QuestionsPage() {
   const params = new URLSearchParams(window.location.search);
   const category = (params.get("category") || localStorage.getItem("selectedCategory") || "farmer").toLowerCase();
@@ -75,6 +90,12 @@ export default function QuestionsPage() {
   };
 
   const submitAnswers = async () => {
+    if (!isUserLoggedIn()) {
+      localStorage.setItem("postLoginRedirect", `${window.location.pathname}${window.location.search}`);
+      window.location.href = "/kisaan-login.html";
+      return;
+    }
+
     setLoading(true);
     setError("");
     setSchemes([]);

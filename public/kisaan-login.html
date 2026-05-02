@@ -726,18 +726,86 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="/css/futuristic.css?v=1">
 </head>
 <body>
   <main>
-    <section id="languageScreen" class="screen language-screen active" aria-labelledby="languageTitle">
+    <section id="heroScreen" class="screen cinematic-hero active" aria-labelledby="heroTitle">
+      <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+      <nav class="hero-nav" aria-label="YojanMitra">
+        <div class="hero-brand">
+          <span class="hero-brand-mark">YM</span>
+          <span>YojanMitra</span>
+        </div>
+        <button id="heroMenuButton" class="hero-menu-button" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+        <div id="heroNavLinks" class="hero-nav-links">
+          <button id="heroChooseLanguageNav" class="hero-nav-button" type="button">Languages</button>
+          <a href="/category.html">Dashboard</a>
+          <a href="/category.html">Schemes</a>
+          <button id="heroLaunchApp" class="hero-nav-button hero-launch-button" type="button">Launch App</button>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-badge reveal-item">India's Smartest Welfare Engine</div>
+        <div class="static-orbit-particles reveal-item" aria-hidden="true">
+          <span class="static-orbit-glow"></span>
+          <span class="static-orbit-ring">
+            <i style="--angle: 0deg; --delay: 0s;"></i>
+            <i style="--angle: 18deg; --delay: -0.12s;"></i>
+            <i style="--angle: 36deg; --delay: -0.24s;"></i>
+            <i style="--angle: 54deg; --delay: -0.36s;"></i>
+            <i style="--angle: 72deg; --delay: -0.48s;"></i>
+            <i style="--angle: 90deg; --delay: -0.6s;"></i>
+            <i style="--angle: 108deg; --delay: -0.72s;"></i>
+            <i style="--angle: 126deg; --delay: -0.84s;"></i>
+            <i style="--angle: 144deg; --delay: -0.96s;"></i>
+            <i style="--angle: 162deg; --delay: -1.08s;"></i>
+            <i style="--angle: 180deg; --delay: -1.2s;"></i>
+            <i style="--angle: 198deg; --delay: -1.32s;"></i>
+            <i style="--angle: 216deg; --delay: -1.44s;"></i>
+            <i style="--angle: 234deg; --delay: -1.56s;"></i>
+            <i style="--angle: 252deg; --delay: -1.68s;"></i>
+            <i style="--angle: 270deg; --delay: -1.8s;"></i>
+            <i style="--angle: 288deg; --delay: -1.92s;"></i>
+            <i style="--angle: 306deg; --delay: -2.04s;"></i>
+            <i style="--angle: 324deg; --delay: -2.16s;"></i>
+            <i style="--angle: 342deg; --delay: -2.28s;"></i>
+          </span>
+        </div>
+        <h1 id="heroTitle" class="hero-title reveal-item">YOJANMITRA</h1>
+        <p class="hero-subtitle reveal-item">
+          <span>हर योजना, आपके साथ</span>
+          <span>Every Scheme • For Every Indian</span>
+        </p>
+        <div class="tricolor-line reveal-item" aria-hidden="true"></div>
+        <div id="heroStats" class="hero-stats reveal-item">
+          <div><strong>70+</strong><span>Schemes</span></div>
+          <div><strong>22</strong><span>Languages</span></div>
+        </div>
+        <div class="hero-actions reveal-item">
+          <button id="heroChooseLanguage" class="hero-cta hero-cta-primary" type="button">GET STARTED →</button>
+          <a id="heroExploreSchemes" class="hero-cta hero-cta-outline" href="/category.html">EXPLORE SCHEMES</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="languageScreen" class="screen language-screen cinematic-language-screen" aria-labelledby="languageTitle">
+      <nav class="language-topbar" aria-label="Language selection">
+        <div class="language-brand">
+          <span>Yojan</span><strong>Mitra</strong>
+        </div>
+        <button id="languageBackButton" class="language-back-button" type="button">← Back</button>
+      </nav>
       <div class="language-shell">
         <header class="language-header">
           <div class="brand-mark" aria-hidden="true">
             <img src="logo.jpeg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='YM';">
           </div>
-          <h1 id="languageTitle">YojanMitra</h1>
+          <h1 id="languageTitle">CHOOSE LANGUAGE</h1>
           <p class="header-tagline">हर योजना, आपके साथ</p>
-          <p class="language-subtitle">Choose your comfortable language</p>
+          <p class="language-subtitle">Your selected language will be used across YojanMitra</p>
         </header>
         <div id="languageGrid" class="language-grid" aria-label="Language options"></div>
       </div>
@@ -784,6 +852,28 @@
             <p id="otpTagline" class="tagline bilingual"></p>
           </div>
         </div>
+        <div class="otp-assurance" aria-label="OTP verification details">
+          <div class="otp-assurance__badge" aria-hidden="true">OTP</div>
+          <h3>Secure mobile verification</h3>
+          <p>Enter the 4-digit code sent to your phone to continue safely.</p>
+          <ul>
+            <li>
+              <span aria-hidden="true">01</span>
+              <strong>Instant check</strong>
+              <small>Verifies your mobile number before showing personal scheme matches.</small>
+            </li>
+            <li>
+              <span aria-hidden="true">02</span>
+              <strong>Private access</strong>
+              <small>Your login stays tied to your number, not a password.</small>
+            </li>
+            <li>
+              <span aria-hidden="true">03</span>
+              <strong>Easy retry</strong>
+              <small>Did not receive it? Request a fresh OTP from the form.</small>
+            </li>
+          </ul>
+        </div>
       </aside>
       <section class="right-panel">
         <div class="form-card otp-card">
@@ -822,6 +912,27 @@
             </span>
           </li>
         </ul>
+        <div class="welcome-insights" aria-label="What happens next">
+          <h3>Your scheme search is ready</h3>
+          <p>YojanMitra can now guide you through questions and show schemes that fit your profile.</p>
+          <ul>
+            <li>
+              <span aria-hidden="true">01</span>
+              <strong>Answer simple questions</strong>
+              <small>Tell us about your age, work, income, and documents.</small>
+            </li>
+            <li>
+              <span aria-hidden="true">02</span>
+              <strong>Get matched schemes</strong>
+              <small>See welfare benefits that are relevant to your situation.</small>
+            </li>
+            <li>
+              <span aria-hidden="true">03</span>
+              <strong>Prepare to apply</strong>
+              <small>Review required documents before moving ahead.</small>
+            </li>
+          </ul>
+        </div>
       </aside>
       <section class="right-panel">
         <div class="form-card welcome-card">
@@ -1362,6 +1473,7 @@
     }
 
     function showScreen(name) {
+      document.getElementById("heroScreen")?.classList.remove("active");
       Object.values(screens).forEach((screen) => screen.classList.remove("active"));
       screens[name].classList.add("active");
 
@@ -1510,6 +1622,12 @@
           phone: state.phone,
           otp
         });
+        localStorage.setItem("yojanMitraLoggedIn", "true");
+        localStorage.setItem("loggedInUser", JSON.stringify(result.user || {
+          phone: `+91${state.phone}`,
+          loginMethod: "otp"
+        }));
+        localStorage.setItem("yojanMitraUserId", (result.user && (result.user.id || result.user.phone)) || `+91${state.phone}`);
         showToast(result.message || (auto ? "OTP auto-submitted" : "Login verified"));
         showScreen("welcome");
       } catch (error) {
@@ -1569,7 +1687,7 @@
 
     document.getElementById("exploreStrip").addEventListener("click", (event) => {
       event.preventDefault();
-      alert(`${englishText.exploreWithoutLogin}${state.language === "en" ? "" : " / " + t("exploreWithoutLogin")}`);
+      window.location.href = "/category.html";
     });
 
     document.getElementById("backButton").addEventListener("click", () => showScreen("login"));
@@ -1596,7 +1714,9 @@
     });
 
     document.getElementById("getStartedButton").addEventListener("click", () => {
-      window.location.href = "/category.html";
+      const returnTo = localStorage.getItem("postLoginRedirect");
+      localStorage.removeItem("postLoginRedirect");
+      window.location.href = returnTo || "/category.html";
     });
 
     otpInputs.forEach((input, index) => {
@@ -1635,11 +1755,16 @@
     });
 
     window.addEventListener("load", () => {
+      if (document.getElementById("heroScreen")?.classList.contains("active")) {
+        return;
+      }
+
       speakSequence([
         { text: "Namaste! Aap kaun si bhasha mein baat karna chahte hain?", lang: "hi-IN" },
         { text: "Hello! Which language are you comfortable with?", lang: "en-IN" }
       ]);
     });
   </script>
+  <script src="/js/futuristic-ui.js?v=1"></script>
 </body>
 </html>

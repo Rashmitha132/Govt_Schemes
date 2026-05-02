@@ -103,10 +103,10 @@ const commonOptions = {
     ["80+", "🙏", "80+", "80+", "80+"]
   ],
   income: [
-    ["Below 1 lakh", "🟢", "Below 1 lakh", "1 लाख से कम", "1 ಲಕ್ಷಕ್ಕಿಂತ ಕಡಿಮೆ"],
-    ["1-3 lakh", "🟡", "1-3 lakh", "1-3 लाख", "1-3 ಲಕ್ಷ"],
-    ["3-6 lakh", "🟠", "3-6 lakh", "3-6 लाख", "3-6 ಲಕ್ಷ"],
-    ["Above 6 lakh", "🔵", "Above 6 lakh", "6 लाख से अधिक", "6 ಲಕ್ಷಕ್ಕಿಂತ ಹೆಚ್ಚು"]
+    ["0-50000", "🟢", "0-50000", "0-50000", "0-50000"],
+    ["50000-100000", "🟡", "50000-100000", "50000-100000", "50000-100000"],
+    ["100000-200000", "🟠", "100000-200000", "100000-200000", "100000-200000"],
+    ["200000+", "🔵", "200000+", "200000+", "200000+"]
   ],
   state: [
     ["Karnataka", "📍", "Karnataka", "कर्नाटक", "ಕರ್ನಾಟಕ"],
@@ -132,9 +132,48 @@ function options(items) {
   return items.map(([value, icon, en, hi, kn]) => option(value, icon, en, hi, kn));
 }
 
+commonOptions.state = [
+  ["Andhra Pradesh", "pin", "Andhra Pradesh", "Andhra Pradesh", "Andhra Pradesh"],
+  ["Arunachal Pradesh", "pin", "Arunachal Pradesh", "Arunachal Pradesh", "Arunachal Pradesh"],
+  ["Assam", "pin", "Assam", "Assam", "Assam"],
+  ["Bihar", "pin", "Bihar", "Bihar", "Bihar"],
+  ["Chhattisgarh", "pin", "Chhattisgarh", "Chhattisgarh", "Chhattisgarh"],
+  ["Goa", "pin", "Goa", "Goa", "Goa"],
+  ["Gujarat", "pin", "Gujarat", "Gujarat", "Gujarat"],
+  ["Haryana", "pin", "Haryana", "Haryana", "Haryana"],
+  ["Himachal Pradesh", "pin", "Himachal Pradesh", "Himachal Pradesh", "Himachal Pradesh"],
+  ["Jharkhand", "pin", "Jharkhand", "Jharkhand", "Jharkhand"],
+  ["Karnataka", "pin", "Karnataka", "Karnataka", "Karnataka"],
+  ["Kerala", "pin", "Kerala", "Kerala", "Kerala"],
+  ["Madhya Pradesh", "pin", "Madhya Pradesh", "Madhya Pradesh", "Madhya Pradesh"],
+  ["Maharashtra", "pin", "Maharashtra", "Maharashtra", "Maharashtra"],
+  ["Manipur", "pin", "Manipur", "Manipur", "Manipur"],
+  ["Meghalaya", "pin", "Meghalaya", "Meghalaya", "Meghalaya"],
+  ["Mizoram", "pin", "Mizoram", "Mizoram", "Mizoram"],
+  ["Nagaland", "pin", "Nagaland", "Nagaland", "Nagaland"],
+  ["Odisha", "pin", "Odisha", "Odisha", "Odisha"],
+  ["Punjab", "pin", "Punjab", "Punjab", "Punjab"],
+  ["Rajasthan", "pin", "Rajasthan", "Rajasthan", "Rajasthan"],
+  ["Sikkim", "pin", "Sikkim", "Sikkim", "Sikkim"],
+  ["Tamil Nadu", "pin", "Tamil Nadu", "Tamil Nadu", "Tamil Nadu"],
+  ["Telangana", "pin", "Telangana", "Telangana", "Telangana"],
+  ["Tripura", "pin", "Tripura", "Tripura", "Tripura"],
+  ["Uttar Pradesh", "pin", "Uttar Pradesh", "Uttar Pradesh", "Uttar Pradesh"],
+  ["Uttarakhand", "pin", "Uttarakhand", "Uttarakhand", "Uttarakhand"],
+  ["West Bengal", "pin", "West Bengal", "West Bengal", "West Bengal"],
+  ["Andaman and Nicobar Islands", "pin", "Andaman and Nicobar Islands", "Andaman and Nicobar Islands", "Andaman and Nicobar Islands"],
+  ["Chandigarh", "pin", "Chandigarh", "Chandigarh", "Chandigarh"],
+  ["Dadra and Nagar Haveli and Daman and Diu", "pin", "Dadra and Nagar Haveli and Daman and Diu", "Dadra and Nagar Haveli and Daman and Diu", "Dadra and Nagar Haveli and Daman and Diu"],
+  ["Delhi", "pin", "Delhi", "Delhi", "Delhi"],
+  ["Jammu and Kashmir", "pin", "Jammu and Kashmir", "Jammu and Kashmir", "Jammu and Kashmir"],
+  ["Ladakh", "pin", "Ladakh", "Ladakh", "Ladakh"],
+  ["Lakshadweep", "pin", "Lakshadweep", "Lakshadweep", "Lakshadweep"],
+  ["Puducherry", "pin", "Puducherry", "Puducherry", "Puducherry"]
+];
+
 const questionSets = {
   woman: [
-    { key: "age", icon: "🎂", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
+    { key: "age", icon: "👤", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
     { key: "maritalStatus", icon: "💍", label: { en: "Marital status", hi: "वैवाहिक स्थिति", kn: "ವೈವಾಹಿಕ ಸ್ಥಿತಿ" }, options: options([
       ["Single", "🙋", "Single", "अविवाहित", "ಅವಿವಾಹಿತ"],
       ["Married", "👪", "Married", "विवाहित", "ವಿವಾಹಿತ"],
@@ -153,7 +192,7 @@ const questionSets = {
     { key: "educationLevel", icon: "🎓", label: { en: "Education level", hi: "शिक्षा", kn: "ಶಿಕ್ಷಣ" }, options: options(commonOptions.education) }
   ],
   student: [
-    { key: "age", icon: "🎂", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
+    { key: "age", icon: "👤", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
     { key: "educationLevel", icon: "🎓", label: { en: "Education level", hi: "शिक्षा", kn: "ಶಿಕ್ಷಣ" }, options: options(commonOptions.education) },
     { key: "annualFamilyIncome", icon: "💰", label: { en: "Annual family income", hi: "परिवार की सालाना आय", kn: "ಕುಟುಂಬದ ವಾರ್ಷಿಕ ಆದಾಯ" }, options: options(commonOptions.income) },
     { key: "casteCategory", icon: "🪪", label: { en: "Caste/category", hi: "जाति/वर्ग", kn: "ಜಾತಿ/ವರ್ಗ" }, options: options([
@@ -171,7 +210,7 @@ const questionSets = {
     ]) }
   ],
   farmer: [
-    { key: "age", icon: "🎂", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
+    { key: "age", icon: "👤", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
     { key: "landSize", icon: "🌾", label: { en: "Land size", hi: "जमीन का आकार", kn: "ಜಮೀನಿನ ಗಾತ್ರ" }, options: options([
       ["No land", "🚫", "No land", "जमीन नहीं", "ಜಮೀನು ಇಲ್ಲ"],
       ["Below 1 acre", "🌱", "Below 1 acre", "1 एकड़ से कम", "1 ಏಕರೆಗಿಂತ ಕಡಿಮೆ"],
@@ -193,7 +232,7 @@ const questionSets = {
     ]) }
   ],
   senior: [
-    { key: "age", icon: "🎂", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.seniorAge) },
+    { key: "age", icon: "👤", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.seniorAge) },
     { key: "pensionStatus", icon: "🏦", label: { en: "Pension status", hi: "पेंशन स्थिति", kn: "ಪಿಂಚಣಿ ಸ್ಥಿತಿ" }, options: options([
       ["Receiving pension", "✅", "Receiving pension", "पेंशन मिल रही है", "ಪಿಂಚಣಿ ಸಿಗುತ್ತಿದೆ"],
       ["Not receiving pension", "❌", "Not receiving pension", "पेंशन नहीं मिल रही", "ಪಿಂಚಣಿ ಸಿಗುತ್ತಿಲ್ಲ"]
@@ -208,7 +247,7 @@ const questionSets = {
     ]) }
   ],
   business: [
-    { key: "age", icon: "🎂", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
+    { key: "age", icon: "👤", label: { en: "Age", hi: "उम्र", kn: "ವಯಸ್ಸು" }, options: options(commonOptions.age) },
     { key: "businessType", icon: "🏪", label: { en: "Business type", hi: "व्यवसाय प्रकार", kn: "ವ್ಯಾಪಾರ ಪ್ರಕಾರ" }, options: options([
       ["Shop", "🏪", "Shop", "दुकान", "ಅಂಗಡಿ"],
       ["Tailoring", "🧵", "Tailoring", "सिलाई", "ಹೊಲಿಗೆ"],
@@ -250,12 +289,37 @@ let toastTimer;
 let lastSpokenStep = -1;
 let latestRecommendationMeta = {};
 
+function isUserLoggedIn() {
+  if (localStorage.getItem("yojanMitraLoggedIn") === "true") {
+    return true;
+  }
+
+  return ["loggedInUser", "currentUser", "user"].some((key) => {
+    try {
+      const value = localStorage.getItem(key);
+      return Boolean(value && JSON.parse(value));
+    } catch (error) {
+      return Boolean(localStorage.getItem(key));
+    }
+  });
+}
+
+function redirectToLoginForEligibility() {
+  localStorage.setItem("postLoginRedirect", `${window.location.pathname}${window.location.search}`);
+  showToast("Please login to check eligibility");
+  speak("Please login to check eligibility");
+  setTimeout(() => {
+    window.location.href = "/kisaan-login.html";
+  }, 800);
+}
+
 const categoryLabel = document.getElementById("categoryLabel");
 const stepLabel = document.getElementById("stepLabel");
 const questionCard = document.getElementById("questionCard");
 const resultList = document.getElementById("resultList");
 const toast = document.getElementById("toast");
 const title = document.querySelector("header h2");
+const questionShell = document.querySelector(".question-shell");
 const voiceTitle = document.querySelector(".voice-banner strong");
 const voiceBanner = document.querySelector(".voice-banner");
 const featureVoiceNative = document.getElementById("featureVoiceNative");
@@ -364,37 +428,63 @@ function getResultsIntro() {
 }
 
 function renderQuestion() {
+  questionShell.classList.remove("results-mode");
+  questionCard.hidden = false;
   const question = questions[step];
   categoryLabel.textContent = `${categories[category]?.en || "Category"} / ${localized(categories[category] || { en: "Category", hi: "वर्ग", kn: "ವರ್ಗ" })}`;
   title.textContent = text.findTitle;
   voiceTitle.textContent = text.answerPrompt;
   stepLabel.textContent = `${text.step} ${step + 1} ${text.of} ${questions.length}`;
   resultList.innerHTML = "";
+  const isStateQuestion = question.key === "state";
+  const answerControls = isStateQuestion
+    ? `
+      <label class="state-select-field">
+        <span>Select state or union territory</span>
+        <select id="stateSelect">
+          <option value="">Choose state / union territory</option>
+          ${question.options.map((item) => `
+            <option value="${escapeHtml(item.value)}" ${answers[question.key] === item.value ? "selected" : ""}>
+              ${escapeHtml(localized(item.label))}
+            </option>
+          `).join("")}
+        </select>
+      </label>
+    `
+    : `
+      <div class="option-list">
+        ${question.options.map((item) => `
+          <button class="option-button ${answers[question.key] === item.value ? "active" : ""}" type="button" data-value="${item.value}">
+            <span class="option-icon">${item.icon}</span>
+            <span>${localized(item.label)}</span>
+          </button>
+        `).join("")}
+      </div>
+    `;
 
   questionCard.innerHTML = `
     <div class="question-icon">${question.icon}</div>
     <h3>${localized(question.label)}</h3>
     <p class="tap-hint">${text.choose}</p>
-    <div class="option-list">
-      ${question.options.map((item) => `
-        <button class="option-button ${answers[question.key] === item.value ? "active" : ""}" type="button" data-value="${item.value}">
-          <span class="option-icon">${item.icon}</span>
-          <span>${localized(item.label)}</span>
-        </button>
-      `).join("")}
-    </div>
+    ${answerControls}
     <div class="actions">
       <button type="button" id="questionBack" ${step === 0 || loading ? "disabled" : ""}>${text.back}</button>
       <button type="button" id="questionNext">${loading ? text.finding : step === questions.length - 1 ? text.showSchemes : text.next}</button>
     </div>
   `;
 
-  questionCard.querySelectorAll(".option-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      answers[question.key] = button.dataset.value;
-      renderQuestion();
+  if (isStateQuestion) {
+    document.getElementById("stateSelect").addEventListener("change", (event) => {
+      answers[question.key] = event.target.value;
     });
-  });
+  } else {
+    questionCard.querySelectorAll(".option-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        answers[question.key] = button.dataset.value;
+        renderQuestion();
+      });
+    });
+  }
 
   document.getElementById("questionBack").addEventListener("click", () => {
     step = Math.max(0, step - 1);
@@ -423,6 +513,11 @@ function renderQuestion() {
 }
 
 async function submitAnswers() {
+  if (!isUserLoggedIn()) {
+    redirectToLoginForEligibility();
+    return;
+  }
+
   loading = true;
   renderQuestion();
 
@@ -453,6 +548,8 @@ async function submitAnswers() {
 }
 
 function renderSchemes(schemes) {
+  questionShell.classList.add("results-mode");
+  questionCard.hidden = true;
   questionCard.innerHTML = "";
 
   if (!schemes.length) {
@@ -488,6 +585,8 @@ function renderSchemes(schemes) {
 
 document.getElementById("backButton").textContent = `← ${text.back}`;
 function renderPrioritizedSchemes(schemes) {
+  questionShell.classList.add("results-mode");
+  questionCard.hidden = true;
   questionCard.innerHTML = "";
 
   if (!schemes.length) {
