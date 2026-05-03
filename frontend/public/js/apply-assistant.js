@@ -259,7 +259,7 @@ function renderQuestion() {
 }
 
 async function getAiAssistance(question = "") {
-  const result = await requestJson("/api/applications/ai-assist", {
+  const result = await requestJson("https://govt-schemes-2t15.onrender.com/api/applications/ai-assist", {
     method: "POST",
     body: JSON.stringify({
       userId: getUserId(),
@@ -275,7 +275,7 @@ async function getAiAssistance(question = "") {
 }
 
 async function uploadDocuments() {
-  await requestJson("/api/applications/upload-documents", {
+  await requestJson("https://govt-schemes-2t15.onrender.com/api/applications/upload-documents", {
     method: "POST",
     body: JSON.stringify({
       userId: getUserId(),
@@ -287,7 +287,7 @@ async function uploadDocuments() {
 }
 
 async function prepareDraft() {
-  return requestJson("/api/applications/prepare-draft", {
+  return requestJson("https://govt-schemes-2t15.onrender.com/api/applications/prepare-draft", {
     method: "POST",
     body: JSON.stringify({
       userId: getUserId(),
@@ -392,7 +392,7 @@ async function loadScheme() {
   setAssistantMessage(text.loading, false);
 
   try {
-    const result = await requestJson(`/api/schemes/${encodeURIComponent(schemeId)}/apply-requirements`);
+    const result = await requestJson(`https://govt-schemes-2t15.onrender.com/api/schemes/${encodeURIComponent(schemeId)}/apply-requirements`);
     scheme = result.scheme;
     documents = (scheme.requiredDocuments || []).map((name) => ({ name, hasDocument: null, fileName: "" }));
     els.schemeName.textContent = scheme.name;
@@ -458,7 +458,7 @@ els.continueButton.addEventListener("click", async () => {
   els.statusBadge.textContent = text.confirmed;
 
   try {
-    const result = await requestJson("/api/applications/confirm-apply", {
+    const result = await requestJson("https://govt-schemes-2t15.onrender.com/api/applications/confirm-apply", {
       method: "POST",
       body: JSON.stringify({
         userId: getUserId(),

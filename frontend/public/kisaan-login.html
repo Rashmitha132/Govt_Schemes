@@ -1583,7 +1583,7 @@
       }
 
       state.phone = digits;
-      const result = await postJson("/api/otp/request", {
+      const result = await postJson("https://govt-schemes-2t15.onrender.com/api/otp/request", {
         phone: digits,
         language: state.language
       });
@@ -1618,7 +1618,7 @@
       }
 
       try {
-        const result = await postJson("/api/otp/verify", {
+        const result = await postJson("https://govt-schemes-2t15.onrender.com/api/otp/verify", {
           phone: state.phone,
           otp
         });
@@ -1676,7 +1676,7 @@
       }
 
       try {
-        const result = await postJson("/api/missed-call-login", {
+        const result = await postJson("https://govt-schemes-2t15.onrender.com/api/missed-call-login", {
           phone: digits,
           language: state.language
         });
@@ -1697,7 +1697,7 @@
 
     document.getElementById("resendButton").addEventListener("click", async () => {
       try {
-        const result = await postJson("/api/otp/request", {
+        const result = await postJson("https://govt-schemes-2t15.onrender.com/api/otp/request", {
           phone: state.phone,
           language: state.language
         });

@@ -42,7 +42,7 @@ registerForm.addEventListener("submit", async (event) => {
   setMessage(registerMessage, "Creating account...", "");
 
   try {
-    const result = await submitJson("/api/register", {
+    const result = await submitJson("https://govt-schemes-2t15.onrender.com/api/register", {
       name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
@@ -70,7 +70,7 @@ loginForm.addEventListener("submit", async (event) => {
   setMessage(loginMessage, "Checking account...", "");
 
   try {
-    const result = await submitJson("/api/login", {
+    const result = await submitJson("https://govt-schemes-2t15.onrender.com/api/login", {
       email: formData.get("email"),
       password: formData.get("password"),
     });

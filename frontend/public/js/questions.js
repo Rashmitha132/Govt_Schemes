@@ -546,7 +546,7 @@ async function submitAnswers() {
   renderQuestion();
 
   try {
-    const response = await fetch("/api/recommend-schemes", {
+    const response = await fetch("https://govt-schemes-2t15.onrender.com/api/recommend-schemes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ category, answers })

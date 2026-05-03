@@ -399,7 +399,7 @@ async function goToQuestions(categoryId) {
   }
 
   try {
-    await postJson("/api/categories/select", {
+    await postJson("https://govt-schemes-2t15.onrender.com/api/categories/select", {
       categoryId: selectedCategory,
       language
     });
@@ -412,7 +412,7 @@ async function goToQuestions(categoryId) {
 
 async function loadCategories() {
   try {
-    const response = await fetch("/api/categories");
+    const response = await fetch("https://govt-schemes-2t15.onrender.com/api/categories");
     const contentType = response.headers.get("content-type") || "";
 
     if (!contentType.includes("application/json")) {
