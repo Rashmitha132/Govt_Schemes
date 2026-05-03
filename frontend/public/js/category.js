@@ -6,14 +6,19 @@ const logoutButton = document.getElementById("logoutButton");
 const voiceButton = document.getElementById("voiceButton");
 const toast = document.getElementById("toast");
 const headingNativeText = document.getElementById("headingNativeText");
+const subheadingNativeText = document.getElementById("subheadingNativeText");
 const voiceNativeText = document.getElementById("voiceNativeText");
 const nextNativeText = document.getElementById("nextNativeText");
 const featureVoiceNative = document.getElementById("featureVoiceNative");
 const featurePasswordNative = document.getElementById("featurePasswordNative");
 const featureExploreNative = document.getElementById("featureExploreNative");
 const featureMissedNative = document.getElementById("featureMissedNative");
+const featureVoiceTitle = document.getElementById("featureVoiceTitle");
+const featurePasswordTitle = document.getElementById("featurePasswordTitle");
+const featureExploreTitle = document.getElementById("featureExploreTitle");
+const featureMissedTitle = document.getElementById("featureMissedTitle");
 
-const language = localStorage.getItem("appLanguage") || "hi";
+const language = localStorage.getItem("appLanguage") || "en";
 let selectedCategory = localStorage.getItem("selectedCategory") || "";
 let categories = [];
 let toastTimer;
@@ -60,9 +65,14 @@ const fallbackCategories = [
 const copy = {
   hi: {
     heading: "आप कौन हैं?",
+    subheading: "संबंधित योजनाएं देखने के लिए अपनी श्रेणी चुनें",
     prompt: "आप कौन हैं? अपनी श्रेणी चुनें",
     next: "आगे बढ़ें",
     schemes: "योजनाएं",
+    featureVoiceTitle: "आवाज मार्गदर्शन",
+    featurePasswordTitle: "पासवर्ड की जरूरत नहीं",
+    featureExploreTitle: "लॉगिन के बिना देखें",
+    featureMissedTitle: "मिस्ड कॉल लॉगिन",
     featureVoice: "आवाज से सहायता",
     featurePassword: "पासवर्ड की जरूरत नहीं",
     featureExplore: "लॉगिन के बिना जानकारी देखें",
@@ -70,9 +80,14 @@ const copy = {
   },
   kn: {
     heading: "ನೀವು ಯಾರು?",
+    subheading: "ಸಂಬಂಧಿತ ಯೋಜನೆಗಳನ್ನು ನೋಡಲು ನಿಮ್ಮ ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     prompt: "ನೀವು ಯಾರು? ನಿಮ್ಮ ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     next: "ಮುಂದೆ ಹೋಗಿ",
     schemes: "ಯೋಜನೆಗಳು",
+    featureVoiceTitle: "ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ",
+    featurePasswordTitle: "ಪಾಸ್‌ವರ್ಡ್ ಬೇಡ",
+    featureExploreTitle: "ಲಾಗಿನ್ ಇಲ್ಲದೆ ನೋಡಿ",
+    featureMissedTitle: "ಮಿಸ್ಡ್ ಕಾಲ್ ಲಾಗಿನ್",
     featureVoice: "ಧ್ವನಿ ಸಹಾಯ",
     featurePassword: "ಪಾಸ್‌ವರ್ಡ್ ಬೇಡ",
     featureExplore: "ಲಾಗಿನ್ ಇಲ್ಲದೆ ಮಾಹಿತಿ ನೋಡಿ",
@@ -80,17 +95,37 @@ const copy = {
   },
   en: {
     heading: "Who are you?",
+    subheading: "Select your category to see relevant schemes",
     prompt: "Who are you? Tap your category",
     next: "Next",
     schemes: "schemes",
+    featureVoiceTitle: "Voice guided",
+    featurePasswordTitle: "No password needed",
+    featureExploreTitle: "Explore without login",
+    featureMissedTitle: "Missed call login",
     featureVoice: "Voice assistance",
     featurePassword: "No password needed",
     featureExplore: "View without login information",
     featureMissed: "Login by missed call"
+  },
+  te: {
+    heading: "మీరు ఎవరు?",
+    subheading: "సంబంధిత పథకాలను చూడటానికి మీ వర్గాన్ని ఎంచుకోండి",
+    prompt: "మీరు ఎవరు? మీ వర్గాన్ని ఎంచుకోండి",
+    next: "తదుపరి",
+    schemes: "పథకాలు",
+    featureVoiceTitle: "వాయిస్ మార్గదర్శనం",
+    featurePasswordTitle: "పాస్‌వర్డ్ అవసరం లేదు",
+    featureExploreTitle: "లాగిన్ లేకుండా చూడండి",
+    featureMissedTitle: "మిస్డ్ కాల్ లాగిన్",
+    featureVoice: "వాయిస్ సహాయం",
+    featurePassword: "పాస్‌వర్డ్ అవసరం లేదు",
+    featureExplore: "లాగిన్ లేకుండా సమాచారం చూడండి",
+    featureMissed: "మిస్డ్ కాల్ ద్వారా లాగిన్"
   }
 };
 
-const activeCopy = copy[language] || copy.hi;
+const activeCopy = copy[language] || copy.en;
 const categoryTranslations = {
   farmer: {
     en: "Farmer",
@@ -461,12 +496,17 @@ logoutButton.addEventListener("click", logoutUser);
 voiceButton.addEventListener("click", speakPrompt);
 
 headingNativeText.textContent = activeCopy.heading;
+subheadingNativeText.textContent = activeCopy.subheading;
 voiceNativeText.textContent = activeCopy.prompt;
 nextButton.textContent = activeCopy.next;
 featureVoiceNative.textContent = activeCopy.featureVoice;
 featurePasswordNative.textContent = activeCopy.featurePassword;
 featureExploreNative.textContent = activeCopy.featureExplore;
 featureMissedNative.textContent = activeCopy.featureMissed;
+featureVoiceTitle.textContent = activeCopy.featureVoiceTitle;
+featurePasswordTitle.textContent = activeCopy.featurePasswordTitle;
+featureExploreTitle.textContent = activeCopy.featureExploreTitle;
+featureMissedTitle.textContent = activeCopy.featureMissedTitle;
 
 loadCategories();
 renderAuthActions();
