@@ -597,7 +597,7 @@ function renderSchemes(schemes) {
             <p><strong>${escapeHtml(text.benefits)}:</strong> ${escapeHtml(scheme.benefits)}</p>
             <p><strong>${escapeHtml(text.eligibility)}:</strong> ${escapeHtml(scheme.eligibility)}</p>
             <p><strong>${escapeHtml(text.documents)}:</strong> ${escapeHtml((scheme.documentsRequired || []).join(", "))}</p>
-            <a href="/apply-assistant/${encodeURIComponent(String(scheme.id || ""))}">${escapeHtml(text.apply)}</a>
+            <a href="/apply-assistant.html?schemeId=${encodeURIComponent(String(scheme.id || ""))}">${escapeHtml(text.apply)}</a>
           </article>
         `).join("")}
       </div>
@@ -639,7 +639,7 @@ function renderPrioritizedSchemes(schemes) {
       <p><strong>${escapeHtml(text.documents)}:</strong> ${escapeHtml((scheme.documentsRequired || []).join(", "))}</p>
       <p><strong>Missing:</strong> ${escapeHtml((scheme.missingDocuments || []).join(", ") || "None")}</p>
       ${scheme.deadline ? `<p><strong>Deadline:</strong> ${escapeHtml(new Date(scheme.deadline).toLocaleDateString())}</p>` : ""}
-      <a class="apply-cta" href="/apply-assistant/${encodeURIComponent(String(scheme.id || ""))}">${escapeHtml(text.apply)}</a>
+      <a class="apply-cta" href="/apply-assistant.html?schemeId=${encodeURIComponent(String(scheme.id || ""))}">${escapeHtml(text.apply)}</a>
     </article>
   `;
 

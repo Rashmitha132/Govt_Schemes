@@ -162,7 +162,7 @@ export default function QuestionsPage() {
       <p><strong>Missing documents:</strong> {(scheme.missingDocuments || []).join(", ") || "None"}</p>
       <p><strong>Urgency:</strong> {scheme.applyUrgency || "Open"}</p>
       {scheme.deadline && <p><strong>Deadline:</strong> {new Date(scheme.deadline).toLocaleDateString()}</p>}
-      <a href={`/apply-assistant/${encodeURIComponent(scheme.id || scheme._id || "")}`}>Apply now</a>
+      <a href={`/apply-assistant.html?schemeId=${encodeURIComponent(scheme.id || scheme._id || "")}`}>Apply now</a>
     </article>
   );
 

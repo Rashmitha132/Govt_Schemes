@@ -1,4 +1,5 @@
-const schemeId = window.location.pathname.split("/").filter(Boolean).pop();
+const applyParams = new URLSearchParams(window.location.search);
+const schemeId = applyParams.get("schemeId") || window.location.pathname.split("/").filter(Boolean).pop();
 
 const els = {
   availableDocuments: document.getElementById("availableDocuments"),
