@@ -46,10 +46,10 @@ Reduces dependency on text input
 3. Shows matching criteria
 4. Builds user trust
 
-⚡ Real-Time Eligibility Check: 
-1.Instantly determines user eligibility without manual research.
-2.Reduces time spent searching
-3.Simplifies decision-making
+⚡ Real-Time Eligibility Check:
+1. Instantly determines user eligibility without manual research.
+2. Reduces time spent searching
+3. Simplifies decision-making
 
 🔄 Explore Without Login: 
 1. Users can browse available schemes without authentication.
