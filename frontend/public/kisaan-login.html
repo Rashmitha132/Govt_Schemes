@@ -1588,6 +1588,10 @@
         language: state.language
       });
 
+      if (result.otp) {
+        alert("Your OTP is: " + result.otp);
+      }
+
       if (result.demoOtp) {
         state.demoOtp = result.demoOtp;
         showToast(`Demo OTP: ${result.demoOtp}`);
@@ -1701,6 +1705,9 @@
           phone: state.phone,
           language: state.language
         });
+        if (result.otp) {
+          alert("Your OTP is: " + result.otp);
+        }
         if (result.demoOtp) {
           state.demoOtp = result.demoOtp;
           document.getElementById("otpSubtext").textContent = `Demo OTP for ${getMaskedPhone()}: ${result.demoOtp}`;
