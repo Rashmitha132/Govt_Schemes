@@ -2648,3 +2648,216 @@ body:has(.category-page)::after {
     margin-left: var(--questions-sidebar-width) !important;
   }
 }
+
+/* Final mobile responsiveness pass. Keep this at the end so it wins over
+   the desktop reference-match rules above. */
+@media (max-width: 768px) {
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100%;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    display: block !important;
+  }
+
+  main,
+  .screen,
+  .screen.active,
+  .app-screen,
+  .app-screen.active,
+  #otpScreen.app-screen,
+  #welcomeScreen.app-screen,
+  .category-page,
+  .questions-page,
+  .apply-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .screen.active,
+  .app-screen.active,
+  #otpScreen.app-screen.active,
+  #welcomeScreen.app-screen.active {
+    display: block !important;
+  }
+
+  .left-panel,
+  .brand-panel,
+  .app-screen .left-panel,
+  #otpScreen.app-screen .left-panel,
+  #welcomeScreen.app-screen .left-panel,
+  .category-page .brand-panel,
+  .questions-page .brand-panel {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 14px 16px !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .right-panel,
+  .content-panel,
+  .app-screen .right-panel,
+  #otpScreen.app-screen .right-panel,
+  #welcomeScreen.app-screen .right-panel,
+  .category-page .content-panel,
+  .questions-page .content-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 18px 14px 28px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+
+  .logo-row,
+  .brand-lockup,
+  .app-screen .logo-row {
+    width: min(100%, 280px) !important;
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: 50px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin: 0 !important;
+  }
+
+  .logo-icon,
+  .brand-logo,
+  .app-screen .logo-icon {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+  }
+
+  .app-name,
+  .brand-lockup h1,
+  .app-screen .app-name {
+    font-size: clamp(22px, 7vw, 30px) !important;
+    line-height: 1.05 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .tagline,
+  .brand-lockup p,
+  .brand-tagline {
+    margin-top: 4px !important;
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+  }
+
+  .features,
+  .feature-list,
+  .left-panel .feature-list,
+  .brand-panel .feature-list,
+  #otpScreen .otp-assurance,
+  #welcomeScreen .welcome-insights {
+    display: none !important;
+  }
+
+  .form-card,
+  .category-card-shell,
+  .question-shell,
+  .assistant-shell,
+  .app-screen .form-card,
+  .questions-page .question-shell,
+  .category-page .category-card-shell {
+    width: min(100%, 430px) !important;
+    max-width: calc(100vw - 28px) !important;
+    min-height: auto !important;
+    margin: 0 auto !important;
+    padding: clamp(18px, 5vw, 24px) !important;
+    border-radius: 18px !important;
+  }
+
+  .voice-chip {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .phone-row {
+    width: 100% !important;
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(74px, 86px) minmax(0, 1fr) !important;
+  }
+
+  .country-code {
+    min-width: 0 !important;
+    width: auto !important;
+    padding: 0 8px !important;
+    font-size: 13px !important;
+  }
+
+  .phone-input,
+  .app-screen .phone-input {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 18px !important;
+  }
+
+  .primary-btn,
+  .secondary-btn,
+  .explore-strip,
+  .next-button,
+  .actions button,
+  .apply-cta {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .divider {
+    width: 100%;
+  }
+
+  .otp-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .otp-input {
+    min-height: 54px !important;
+    font-size: 24px !important;
+  }
+
+  .category-page .categories-grid,
+  .questions-page .option-list,
+  .scheme-detail-list,
+  .questions-page .results-mode .scheme-detail-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .category-page .category-option {
+    min-height: 126px !important;
+  }
+
+  .questions-page .content-panel,
+  .category-page .content-panel {
+    padding-top: 18px !important;
+  }
+
+  .questions-page .question-card {
+    padding: 18px !important;
+  }
+}
