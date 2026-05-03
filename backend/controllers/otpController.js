@@ -25,6 +25,7 @@ const requestOtp = (req, res) => {
 
   return res.json({
     success: true,
+    otp,
     message: SHOW_DEMO_OTP
       ? "Demo OTP generated. Use the OTP shown on screen."
       : "OTP sent successfully",
